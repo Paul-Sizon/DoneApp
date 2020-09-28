@@ -1,34 +1,51 @@
 package com.example.mytodo
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import androidx.navigation.findNavController
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.fragment_list.*
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.mytodo.databinding.FragmentListBinding
+import com.example.mytodo.databinding.FragmentNewTaskBinding
 
 
 class ListFragment : Fragment() {
+    private lateinit var viewModel: TaskViewModel
+
+    private lateinit var binding: FragmentListBinding
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_list, null);
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_list,
+            container,
+            false
+        )
 
-        val floatingButton: FloatingActionButton = view.findViewById(R.id.floatingActionButton)
-        floatingButton.setOnClickListener {view.findNavController().navigate(R.id.action_listFragment_to_newTaskFragment) }
+        viewModel = ViewModelProvider(requireActivity()).get(TaskViewModel::class.java)
 
-        val textTask = view.findViewById<TextView>(R.id.textTask)
+        //receive message
+        viewModel.titleOfTask.observe(viewLifecycleOwner, { binding.textTask.text = it.toString() })
+        viewModel.describOfTask.observe(viewLifecycleOwner, { binding.textDescrib.text = it.toString() })
 
 
-        return view
+        binding.floatingActionButton.setOnClickListener {
+            findNavController().navigate(
+                ListFragmentDirections.actionListFragmentToNewTaskFragment()
+            )
+        }
+
+
+        return binding.root
     }
+
 
 }
