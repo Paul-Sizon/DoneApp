@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/listFragment"
         android:name="com.example.mytodo.ListFragment"
-        android:label="fragment_list"
+        android:label="List"
         tools:layout="@layout/fragment_list">
         <action
             android:id="@+id/action_listFragment_to_newTaskFragment"
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/newTaskFragment"
         android:name="com.example.mytodo.NewTaskFragment"
-        android:label="fragment_new_task"
+        android:label="Add New Task"
         tools:layout="@layout/fragment_new_task">
         <action
             android:id="@+id/action_newTaskFragment_to_listFragment"

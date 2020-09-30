@@ -1,5 +1,7 @@
 package com.example.mytodo
 
+import android.app.Activity
+import android.app.Application
 import android.os.Bundle
 import android.text.TextUtils
 
@@ -38,41 +40,39 @@ class NewTaskFragment : Fragment() {
             false
         )
 
-       viewModel = ViewModelProvider(requireActivity()).get(TaskDBViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(TaskDBViewModel::class.java)
 
         //action
-        binding.buttonDone.setOnClickListener {
-            //send the message to another fragment
-//            viewModel.setMsgtoViewModel(
-//                binding.editTextTitle.text.toString(),
-//                binding.editTextDescrib.text.toString()
-//            )
-
+        binding.bbb.setOnClickListener {
             insertDataToDatabase()
-
         }
-
         return binding.root
     }
+
+
+
     private fun insertDataToDatabase() {
-        val title = binding.editTextTitle.text.toString()
-        val describtion = binding.editTextDescrib.text.toString()
-        val task = Task(0, title, describtion)
+        val task = Task(0, title = binding.editTextTitle.text.toString(), describtion = binding.editTextTitle.text.toString())
 
         //check that title is not empty
-        if (checkTitle(title)){
+        if (checkTitle()) {
             //action
             viewModel.insert(task)
             Toast.makeText(requireContext(), "New Task added", Toast.LENGTH_SHORT).show()
             findNavController().navigate(NewTaskFragmentDirections.actionNewTaskFragmentToListFragment())
-        }else{ Snackbar.make(fragment_new, "Please add the title", Snackbar.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireContext(), "Please fill in the title", Toast.LENGTH_SHORT).show()
 
         }
 
     }
+
     //check that title is not empty
-    private fun checkTitle(title: String): Boolean{
-        return !(TextUtils.isEmpty(title))
+    private fun checkTitle(): Boolean {
+        if (binding.editTextTitle.text.isEmpty()){
+            return false
+        }
+        return true
     }
 
 }
