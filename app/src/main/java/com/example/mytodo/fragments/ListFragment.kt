@@ -1,16 +1,15 @@
-package com.example.mytodo
+package com.example.mytodo.fragments
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ListAdapter
+import android.view.*
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.mytodo.*
 import com.example.mytodo.databinding.FragmentListBinding
 
 
@@ -40,7 +39,7 @@ class ListFragment : Fragment() {
         //viewmodel
         viewModel = ViewModelProvider(this).get(TaskDBViewModel::class.java)
         //viewModel.getAllTasks.observe(viewLifecycleOwner, {it?.let {MyAdapter().myDataList = it}})
-        viewModel.getAllTasks.observe(viewLifecycleOwner, {adapter.setData(it)})
+        viewModel.getAllTasks.observe(viewLifecycleOwner, {adapter.submitList(it)})
 
         // Specify the current activity as the lifecycle owner of the binding.
         // This is necessary so that the binding can observe LiveData updates.
@@ -53,10 +52,31 @@ class ListFragment : Fragment() {
             )
         }
 
+        //menu
+        setHasOptionsMenu(true)
         return binding.root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.delete, menu)
+    }
 
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.menu_delete) {
+            deleteAll()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+private fun deleteAll(){
+    val builder = AlertDialog.Builder(requireContext())
+    builder.setPositiveButton("Yes"){_, _ ->
+        viewModel.deleteAll()
+        Toast.makeText(requireContext(), "All tasks deleted", Toast.LENGTH_SHORT).show()
+    }
+    builder.setNegativeButton("No"){_, _ -> }
+    builder.setTitle("Delete all tasks?")
+    builder.setMessage("Are you sure you want to delete all tasks?")
+    builder.create().show()
+}
 
 }

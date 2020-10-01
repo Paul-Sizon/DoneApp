@@ -12,7 +12,10 @@ interface TaskDatabaseDao {
     suspend fun update(task: Task)
 
     @Delete
-    suspend fun delete(task: Task)
+    suspend fun deleteOne(task: Task)
+    
+    @Query("DELETE FROM task_table")
+    suspend fun deleteAll()
 
     @Query("SELECT * FROM task_table ORDER BY taskId DESC LIMIT 1")
     suspend fun getOneTask(): Task?

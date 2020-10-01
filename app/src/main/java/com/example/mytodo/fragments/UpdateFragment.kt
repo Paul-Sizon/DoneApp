@@ -1,10 +1,9 @@
 package com.example.mytodo.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -45,7 +44,8 @@ class UpdateFragment : Fragment() {
             updateItem()
         }
 
-
+        //menu
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -55,8 +55,8 @@ class UpdateFragment : Fragment() {
 
         //check that title is not empty
         if (checkTitle()) {
-            val updatedTask = Task(args.currentTask.taskId, tit, desc)
-            viewModel.update(updatedTask)
+            val updated = Task(args.currentTask.taskId, tit, desc)
+            viewModel.update(updated)
             Toast.makeText(requireContext(), "Task updated", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
         } else {
@@ -74,4 +74,25 @@ class UpdateFragment : Fragment() {
         return true
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.delete, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.menu_delete) {
+            deleteOneTask()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    private fun deleteOneTask(){
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton("Yes"){_, _ ->
+            viewModel.deleteOne(args.currentTask)
+            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+        }
+        builder.setNegativeButton("No"){_, _ -> }
+        builder.setTitle("Delete ${args.currentTask.title}")
+        builder.setMessage("Are you sure you want to delete?")
+        builder.create().show()
+    }
 }

@@ -37,6 +37,17 @@ class TaskDBViewModel(application: Application): AndroidViewModel(application) {
             repository.update(task)
         }
     }
+
+    fun deleteOne(task: Task){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteOne(task)
+        }
+    }
+    fun deleteAll(){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAll()
+        }
+    }
 }
 
 

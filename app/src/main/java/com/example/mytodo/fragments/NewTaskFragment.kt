@@ -1,11 +1,7 @@
-package com.example.mytodo
+package com.example.mytodo.fragments
 
-import android.app.Activity
-import android.app.Application
 import android.os.Bundle
-import android.text.TextUtils
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,10 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 
 import androidx.navigation.fragment.findNavController
+import com.example.mytodo.fragments.NewTaskFragmentDirections
+import com.example.mytodo.R
+import com.example.mytodo.TaskDBViewModel
 import com.example.mytodo.data.Task
 import com.example.mytodo.databinding.FragmentNewTaskBinding
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_new_task.*
 
 
 class NewTaskFragment : Fragment() {
@@ -52,7 +49,7 @@ class NewTaskFragment : Fragment() {
 
 
     private fun insertDataToDatabase() {
-        val task = Task(0, title = binding.editTextTitle.text.toString(), describtion = binding.editTextTitle.text.toString())
+        val task = Task(0, title = binding.editTextTitle.text.toString(), describtion = binding.editTextDescrib.text.toString())
 
         //check that title is not empty
         if (checkTitle()) {
