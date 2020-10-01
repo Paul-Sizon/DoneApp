@@ -32,6 +32,11 @@ class TaskDBViewModel(application: Application): AndroidViewModel(application) {
             repository.insert(task)
         }
     }
+    fun update(task: Task){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.update(task)
+        }
+    }
 }
 
 

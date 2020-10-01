@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytodo.data.Task
+import com.example.mytodo.fragments.ListFragmentDirections
 import kotlinx.android.synthetic.main.items_layout.view.*
 
 
@@ -26,6 +28,7 @@ class MyAdapter : ListAdapter<Task, MyAdapter.MyViewHolder>(TaskDiffCallback()) 
         )
     }
 
+  /** TODO: binding */
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         // - get element from your dataset at this position
@@ -33,6 +36,12 @@ class MyAdapter : ListAdapter<Task, MyAdapter.MyViewHolder>(TaskDiffCallback()) 
         val currentItem = getItem(position)
         holder.titleItem.text = currentItem.title
         holder.describItem.text = currentItem.describtion
+
+      //opens specific task (using safeargs)
+        holder.itemView.item_lay.setOnClickListener {
+            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
 
@@ -46,4 +55,6 @@ class MyAdapter : ListAdapter<Task, MyAdapter.MyViewHolder>(TaskDiffCallback()) 
         }
 
     }
+
+
 }

@@ -4,18 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface TaskDatabaseDao{
+interface TaskDatabaseDao {
     @Insert
-    fun insert(task: Task)
+    suspend fun insert(task: Task)
 
     @Update
-    fun update(task: Task)
+    suspend fun update(task: Task)
 
     @Delete
-    fun delete(task: Task)
+    suspend fun delete(task: Task)
 
     @Query("SELECT * FROM task_table ORDER BY taskId DESC LIMIT 1")
-    fun getOneTask(): Task?
+    suspend fun getOneTask(): Task?
 
     @Query("SELECT * FROM task_table ORDER BY taskId DESC")
     fun getAllTasks(): LiveData<List<Task>>

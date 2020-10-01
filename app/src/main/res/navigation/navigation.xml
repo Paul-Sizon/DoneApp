@@ -7,17 +7,20 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.mytodo.ListFragment"
+        android:name="com.example.mytodo.fragments.ListFragment"
         android:label="List"
         tools:layout="@layout/fragment_list">
         <action
             android:id="@+id/action_listFragment_to_newTaskFragment"
             app:destination="@id/newTaskFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/newTaskFragment"
-        android:name="com.example.mytodo.NewTaskFragment"
+        android:name="com.example.mytodo.fragments.NewTaskFragment"
         android:label="Add New Task"
         tools:layout="@layout/fragment_new_task">
         <action
@@ -27,6 +30,19 @@
             android:name="tasks"
             android:defaultValue=" "
              />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.example.mytodo.fragments.UpdateFragment"
+        android:label="Edit Task"
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_updateFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+        <argument
+            android:name="currentTask"
+            app:argType="com.example.mytodo.data.Task" />
+
     </fragment>
 
 </navigation>
