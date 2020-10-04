@@ -22,4 +22,10 @@ interface TaskDatabaseDao {
 
     @Query("SELECT * FROM task_table ORDER BY taskId DESC")
     fun getAllTasks(): LiveData<List<Task>>
-}
+
+    @Query("SELECT COUNT(*) FROM task_table")
+    fun getCount(): Int
+
+
+
+    }

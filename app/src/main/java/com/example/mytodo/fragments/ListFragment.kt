@@ -7,26 +7,30 @@ import android.view.*
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.mytodo.*
+import com.example.mytodo.MyAdapter
+import com.example.mytodo.R
+import com.example.mytodo.TaskDBViewModel
 import com.example.mytodo.databinding.FragmentListBinding
+import com.example.mytodo.hideKeyboard
+import kotlinx.coroutines.launch
 
 
-class ListFragment : Fragment() {
+open class ListFragment : Fragment() {
+    
     private lateinit var viewModel: TaskDBViewModel
     private lateinit var binding: FragmentListBinding
+
+    private val TAG = "MyFragment"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.fragment_list,
-            container,
-            false
-        )
+        binding = FragmentListBinding.inflate(inflater,container,false)
         hideKeyboard(activity as Activity)
 
 
@@ -36,13 +40,11 @@ class ListFragment : Fragment() {
         recyclerview.adapter = adapter
 
 
+
         //viewmodel
         viewModel = ViewModelProvider(this).get(TaskDBViewModel::class.java)
-        //viewModel.getAllTasks.observe(viewLifecycleOwner, {it?.let {MyAdapter().myDataList = it}})
-        viewModel.getAllTasks.observe(viewLifecycleOwner, {adapter.submitList(it)})
+        viewModel.getAllTasks.observe(viewLifecycleOwner, { adapter.submitList(it) })
 
-        // Specify the current activity as the lifecycle owner of the binding.
-        // This is necessary so that the binding can observe LiveData updates.
 
 
         //button action
@@ -51,6 +53,7 @@ class ListFragment : Fragment() {
                 ListFragmentDirections.actionListFragmentToNewTaskFragment()
             )
         }
+
 
         //menu
         setHasOptionsMenu(true)
@@ -62,21 +65,32 @@ class ListFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.menu_delete) {
+        if (item.itemId == R.id.menu_delete) {
             deleteAll()
         }
         return super.onOptionsItemSelected(item)
     }
-private fun deleteAll(){
-    val builder = AlertDialog.Builder(requireContext())
-    builder.setPositiveButton("Yes"){_, _ ->
-        viewModel.deleteAll()
-        Toast.makeText(requireContext(), "All tasks deleted", Toast.LENGTH_SHORT).show()
+
+
+
+    private fun deleteAll()= lifecycleScope.launch  {
+
+        val num = viewModel.getCount()
+        if (num != 0) {
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton("Yes") { _, _ ->
+            viewModel.deleteAll()
+            Toast.makeText(requireContext(), "All tasks deleted", Toast.LENGTH_SHORT).show()
+
+        }
+        builder.setNegativeButton("No") { _, _ -> }
+        builder.setTitle("Delete all tasks?")
+        builder.setMessage("Are you sure you want to delete all tasks?")
+        builder.create().show()
+        }
     }
-    builder.setNegativeButton("No"){_, _ -> }
-    builder.setTitle("Delete all tasks?")
-    builder.setMessage("Are you sure you want to delete all tasks?")
-    builder.create().show()
-}
+
 
 }
+

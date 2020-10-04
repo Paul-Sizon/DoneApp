@@ -53,7 +53,6 @@ class UpdateFragment : Fragment() {
         val tit = binding.updateTitle.text.toString()
         val desc = binding.updateDescrib.text.toString()
 
-        //check that title is not empty
         if (checkTitle()) {
             val updated = Task(args.currentTask.taskId, tit, desc)
             viewModel.update(updated)
@@ -84,15 +83,10 @@ class UpdateFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
+
     private fun deleteOneTask(){
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setPositiveButton("Yes"){_, _ ->
             viewModel.deleteOne(args.currentTask)
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
-        }
-        builder.setNegativeButton("No"){_, _ -> }
-        builder.setTitle("Delete ${args.currentTask.title}")
-        builder.setMessage("Are you sure you want to delete?")
-        builder.create().show()
+
     }
 }
