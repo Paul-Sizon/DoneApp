@@ -1,17 +1,15 @@
 package com.example.mytodo.fragments
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.mytodo.R
-import com.example.mytodo.TaskDBViewModel
+import com.example.mytodo.viewmodel.TaskDBViewModel
 import com.example.mytodo.data.Task
 import com.example.mytodo.databinding.FragmentUpdateBinding
 
