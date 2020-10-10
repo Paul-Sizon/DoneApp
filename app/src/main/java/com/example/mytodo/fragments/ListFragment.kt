@@ -2,27 +2,35 @@ package com.example.mytodo.fragments
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.*
+import android.view.GestureDetector.SimpleOnGestureListener
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
 import com.example.mytodo.MyAdapter
 import com.example.mytodo.R
-import com.example.mytodo.TaskDBViewModel
+import com.example.mytodo.data.Task
 import com.example.mytodo.databinding.FragmentListBinding
 import com.example.mytodo.hideKeyboard
+import com.example.mytodo.viewmodel.TaskDBViewModel
 import kotlinx.coroutines.launch
 
 
-open class ListFragment : Fragment() {
+open class ListFragment : Fragment(), MyAdapter.TaskEvents {
     
     private lateinit var viewModel: TaskDBViewModel
     private lateinit var binding: FragmentListBinding
+    private lateinit var adapter: MyAdapter
+
+    private val args by navArgs<ListFragmentArgs>()
 
     private val TAG = "MyFragment"
 
@@ -30,20 +38,22 @@ open class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentListBinding.inflate(inflater,container,false)
+        binding = FragmentListBinding.inflate(inflater, container, false)
+
         hideKeyboard(activity as Activity)
-
-
-        //recyclerView
-        val adapter = MyAdapter()
-        val recyclerview = binding.recyclerView
-        recyclerview.adapter = adapter
-
-
 
         //viewmodel
         viewModel = ViewModelProvider(this).get(TaskDBViewModel::class.java)
+
+        //recyclerView
+        adapter = MyAdapter(this)
+        val recyclerview = binding.recyclerView
+        recyclerview.adapter = adapter
+
         viewModel.getAllTasks.observe(viewLifecycleOwner, { adapter.submitList(it) })
+
+
+
 
 
 
@@ -52,6 +62,7 @@ open class ListFragment : Fragment() {
             findNavController().navigate(
                 ListFragmentDirections.actionListFragmentToNewTaskFragment()
             )
+
         }
 
 
@@ -62,7 +73,9 @@ open class ListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.delete, menu)
+
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_delete) {
@@ -70,6 +83,8 @@ open class ListFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+
 
 
 
@@ -91,6 +106,12 @@ open class ListFragment : Fragment() {
         }
     }
 
+    override fun onDeleteClicked(task: Task) {
+        viewModel.deleteOne(task)
+    }
+
 
 }
+
+
 
