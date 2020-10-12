@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.items_layout.view.*
 
 
 class MyAdapter(taskEvents: TaskEvents) : ListAdapter<Task, MyAdapter.MyViewHolder>(TaskDiffCallback()) {
-    var myDataList = ArrayList<Task>()
+    //var myDataList = ArrayList<Task>()
     val listener: TaskEvents = taskEvents
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -24,8 +24,6 @@ class MyAdapter(taskEvents: TaskEvents) : ListAdapter<Task, MyAdapter.MyViewHold
             LayoutInflater.from(parent.context).inflate(R.layout.items_layout, parent, false)
         )
     }
-
-
 
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -37,12 +35,6 @@ class MyAdapter(taskEvents: TaskEvents) : ListAdapter<Task, MyAdapter.MyViewHold
 
         }
 
-//        fun bind(task: Task, clickListener: (Task) -> Unit) {
-//            itemView.title_item.text = task.title
-//            itemView.describ_item.text = task.describtion
-//            itemView.checkBox.setOnClickListener { clickListener(task) }
-//        }
-
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -53,12 +45,6 @@ class MyAdapter(taskEvents: TaskEvents) : ListAdapter<Task, MyAdapter.MyViewHold
         val currentItem = getItem(position)
         holder.bind(currentItem, listener)
 
-//        fun deleteItem(position: Int) {
-//            currentItem.removeAt(position)
-//            notifyItemRemoved(position)
-//            notifyItemRangeChanged(position, mDataSet.size)
-//            holder.itemView.visibility = View.GONE
-//        }
 
         //opens specific task (using safeargs)
         holder.itemView.item_lay.setOnClickListener {
@@ -81,14 +67,13 @@ class MyAdapter(taskEvents: TaskEvents) : ListAdapter<Task, MyAdapter.MyViewHold
         }
 
     }
-    interface OnItemClickListener {
-        fun onItemClick(position: Int)
-    }
+
 
     interface TaskEvents {
         fun onDeleteClicked(task: Task)
 
     }
+
 
 }
 

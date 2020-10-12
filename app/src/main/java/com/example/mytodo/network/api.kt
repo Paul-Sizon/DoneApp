@@ -1,5 +1,6 @@
 package com.example.mytodo.network
 
+import android.util.Log
 import com.example.mytodo.network.model.Post
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -9,9 +10,18 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
+import java.util.*
 
-private const val BASE_URL = "https://api.quotable.io/"
-    //"https://jsonplaceholder.typicode.com"
+
+
+
+private const val BASE_URL = "https://api.forismatic.com/"
+//    "https://api.forismatic.com"
+    //"https://api.quotable.io/"
+
+
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -19,9 +29,14 @@ private val moshi = Moshi.Builder()
 
 
 interface SimpleApi {
-   // @GET("posts/1")
-   @GET("random?tags=inspirational")
-    suspend fun getPost(): Response<Post>
+//   @GET("api/1.0/?method=getQuote&lang=en&format=json&json=?")
+// @GET("random?tags=inspirational")
+
+  @GET("api/1.0/?method=getQuote&format=json&json=?")
+    suspend fun getPost(
+      @Query("lang") language: String
+  ): Response<Post>
+
 }
 
 

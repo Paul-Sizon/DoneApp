@@ -33,8 +33,8 @@ class TaskRepository(private val taskDao: TaskDatabaseDao) {
         return taskDao.getCount()
     }
 
-    suspend fun getPost(): Response<Post> {
-        return retroApi.api.getPost()
+    suspend fun getPost(language: String): Response<Post> {
+        return retroApi.api.getPost(language)
     }
 
 }

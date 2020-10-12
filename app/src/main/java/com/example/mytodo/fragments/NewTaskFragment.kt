@@ -1,7 +1,6 @@
 package com.example.mytodo.fragments
 
 import android.os.Bundle
-import android.util.Log
 
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +18,7 @@ import com.example.mytodo.viewmodel.TaskDBViewModel
 import com.example.mytodo.data.Task
 import com.example.mytodo.databinding.FragmentNewTaskBinding
 import kotlinx.coroutines.launch
+import java.util.*
 
 
 class NewTaskFragment : Fragment() {
@@ -46,6 +46,10 @@ class NewTaskFragment : Fragment() {
         }
 
 
+
+
+
+
         //action
         binding.bbb.setOnClickListener {
             insertDataToDatabase()
@@ -53,13 +57,22 @@ class NewTaskFragment : Fragment() {
         return binding.root
     }
 
+
+
+
+    private fun checkLanguage(): String {
+        return if (Locale.getDefault().language == "ru") "ru"
+        else "en"
+    }
+
+
     private fun insertMotivation() = lifecycleScope.launch {
-        viewModel.getPost()
+        viewModel.getPost(checkLanguage())
         viewModel.myResponse.observe(viewLifecycleOwner, { response ->
 
 
-            binding.motivationText.text = response.body()?.content
-            binding.motivationAuthor.text = response.body()?.author
+            binding.motivationText.text = response.body()?.quoteText
+            binding.motivationAuthor.text = response.body()?.quoteAuthor
             binding.progressBar.visibility = View.GONE
 
 
@@ -78,10 +91,10 @@ class NewTaskFragment : Fragment() {
         if (checkTitle()) {
             //action
             viewModel.insert(task)
-            Toast.makeText(requireContext(), "New Task added", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(NewTaskFragmentDirections.actionNewTaskFragmentToListFragment())
+            Toast.makeText(requireContext(), R.string.new_added, Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_newTaskFragment_to_listFragment)
         } else {
-            Toast.makeText(requireContext(), "Please fill in the title", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.please_fill, Toast.LENGTH_SHORT).show()
 
         }
 

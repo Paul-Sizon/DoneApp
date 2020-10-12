@@ -21,6 +21,7 @@ class UpdateFragment : Fragment() {
 
     private val args by navArgs<UpdateFragmentArgs>()
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,7 +58,7 @@ class UpdateFragment : Fragment() {
             Toast.makeText(requireContext(), "Task updated", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
         } else {
-            Toast.makeText(requireContext(), "Please fill in the title", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.please_fill, Toast.LENGTH_SHORT).show()
 
         }
 

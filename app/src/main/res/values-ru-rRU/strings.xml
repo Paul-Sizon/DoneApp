@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My ToDO</string>
+    <string name="done_button">Добавить</string>
+    <string name="describtion">Описание</string>
+    <string name="title">Название</string>
+    <string name="get_inspiration">Нажми для вдохновения</string>
+    <string name="update">Обновить</string>
+    <string name="list">Список</string>
+    <string name="add_new_task">Добавить</string>
+    <string name="edit_task">Редактировать</string>
+    <string name="delete_all">Удалить весь список?</string>
+    <string name="are_you_sure">Вы уверены, что хотите удалить все задачи?</string>
+    <string name="Yes">Да</string>
+    <string name="No">Нет</string>
+    <string name="new_added">Добавлено</string>
+    <string name="please_fill">Пожалуйста запишите название задачи</string>
+    <string name="all_deleted">Все задачи удалены</string>
+    <string name="task_updated">Обновлено</string>
+
+
+</resources>
