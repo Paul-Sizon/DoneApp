@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My ToDO</string>
+    <string name="done_button">Añadir</string>
+    <string name="get_inspiration">Inspírate</string>
+    <string name="title">Título</string>
+    <string name="describtion">Descripción</string>
+    <string name="update">Actualizar</string>
+    <string name="list">La Lista</string>
+    <string name="add_new_task">Agregar nueva tarea</string>
+    <string name="edit_task">Editar</string>
+    <string name="delete_all">¿Eliminar todas las tareas?</string>
+    <string name="are_you_sure">¿Estás seguro de que quieres eliminar todas las tareas?</string>
+    <string name="Yes">Si</string>
+    <string name="No">No</string>
+    <string name="new_added">Nueva tarea agregada</string>
+    <string name="please_fill">Por favor complete el titulo</string>
+    <string name="all_deleted">Todas las tareas eliminadas</string>
+    <string name="task_updated">Tarea actualizada</string>
+</resources>

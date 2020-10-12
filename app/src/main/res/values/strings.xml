@@ -3,12 +3,9 @@
     <!-- TODO: Remove or change this placeholder text -->
 
 
-    <string name="done_button">DONE</string>
-    <string name="get_inspiration">Get Inspiration</string>
     <string name="title">Title</string>
-    <string name="describtion">Describtion</string>
+    <string name="describtion">Description</string>
     <string name="update">UPDATE</string>
-    <string name="list">List</string>
     <string name="add_new_task">Add New Task</string>
     <string name="edit_task">Edit Task</string>
     <string name="delete_all">Delete all tasks?</string>
@@ -20,5 +17,8 @@
     <string name="please_fill">Please fill in the title</string>
     <string name="all_deleted">All tasks deleted</string>
     <string name="task_updated">Task Updated</string>
+    <string name="done_button">ADD</string>
+    <string name="get_inspiration">Get Inspiration</string>
+    <string name="list">List</string>
 
 </resources>
