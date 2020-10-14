@@ -1,22 +1,21 @@
 package com.example.mytodo.fragments
 
 import android.os.Bundle
-
+import android.os.SystemClock.sleep
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-
 import androidx.navigation.fragment.findNavController
 import com.example.mytodo.R
-import com.example.mytodo.viewmodel.TaskDBViewModel
 import com.example.mytodo.data.Task
 import com.example.mytodo.databinding.FragmentNewTaskBinding
+import com.example.mytodo.hasNetworkAvailable
+import com.example.mytodo.viewmodel.TaskDBViewModel
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -40,24 +39,33 @@ class NewTaskFragment : Fragment() {
         )
 
         viewModel = ViewModelProvider(requireActivity()).get(TaskDBViewModel::class.java)
+
         binding.motivButton.setOnClickListener {
             binding.progressBar.visibility = View.VISIBLE
-            insertMotivation()
+            checkInternet()
+
         }
-
-
-
-
 
 
         //action
         binding.bbb.setOnClickListener {
             insertDataToDatabase()
         }
+
         return binding.root
     }
 
 
+    fun checkInternet() {
+        if (hasNetworkAvailable()) {
+            insertMotivation()
+        } else {
+            binding.motivationText.text = "Please Connect to the Internet to see the quote"
+            binding.motivationAuthor.text = ""
+            binding.progressBar.visibility = View.GONE
+
+        }
+    }
 
 
     private fun checkLanguage(): String {
@@ -69,11 +77,14 @@ class NewTaskFragment : Fragment() {
     private fun insertMotivation() = lifecycleScope.launch {
         viewModel.getPost(checkLanguage())
         viewModel.myResponse.observe(viewLifecycleOwner, { response ->
-
-
-            binding.motivationText.text = response.body()?.quoteText
-            binding.motivationAuthor.text = response.body()?.quoteAuthor
-            binding.progressBar.visibility = View.GONE
+            if (response.isSuccessful) {
+                binding.motivationText.text = response.body()?.quoteText
+                binding.motivationAuthor.text = response.body()?.quoteAuthor
+                binding.progressBar.visibility = View.GONE
+            } else {
+                binding.motivationText.text = response.errorBody().toString()
+                //binding.motivationAuthor.text = response.code().toString()
+            }
 
 
         })
@@ -102,7 +113,7 @@ class NewTaskFragment : Fragment() {
 
     //check that title is not empty
     private fun checkTitle(): Boolean {
-        if (binding.editTextTitle.text.isEmpty()) {
+        if (binding.editTextTitle.text?.isEmpty()!!) {
             return false
         }
         return true
