@@ -2,6 +2,7 @@ package com.example.mytodo.fragments
 
 import android.os.Bundle
 import android.os.SystemClock.sleep
+import android.transition.Fade
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,16 +17,22 @@ import com.example.mytodo.data.Task
 import com.example.mytodo.databinding.FragmentNewTaskBinding
 import com.example.mytodo.hasNetworkAvailable
 import com.example.mytodo.viewmodel.TaskDBViewModel
+import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.transition.MaterialFadeThrough
 import kotlinx.coroutines.launch
 import java.util.*
 
 
 class NewTaskFragment : Fragment() {
     private lateinit var binding: FragmentNewTaskBinding
-
     private lateinit var viewModel: TaskDBViewModel
 
     //private val TAG = "MyFragment"
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = MaterialContainerTransform()
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,14 +47,14 @@ class NewTaskFragment : Fragment() {
 
         viewModel = ViewModelProvider(requireActivity()).get(TaskDBViewModel::class.java)
 
+        // inspirational phrase
         binding.motivButton.setOnClickListener {
             binding.progressBar.visibility = View.VISIBLE
             checkInternet()
-
         }
 
 
-        //action
+        //add new task
         binding.bbb.setOnClickListener {
             insertDataToDatabase()
         }
@@ -56,18 +63,20 @@ class NewTaskFragment : Fragment() {
     }
 
 
+    /** inspirational phrase block  */
+
     fun checkInternet() {
         if (hasNetworkAvailable()) {
             insertMotivation()
         } else {
             binding.motivationText.text = "Please Connect to the Internet to see the quote"
-            binding.motivationAuthor.text = ""
+            binding.motivationAuthor.text = "Confucius"
             binding.progressBar.visibility = View.GONE
 
         }
     }
 
-
+    // changes phrase based on the system's language. Only russian and english are available on the server
     private fun checkLanguage(): String {
         return if (Locale.getDefault().language == "ru") "ru"
         else "en"
@@ -83,13 +92,14 @@ class NewTaskFragment : Fragment() {
                 binding.progressBar.visibility = View.GONE
             } else {
                 binding.motivationText.text = response.errorBody().toString()
-                //binding.motivationAuthor.text = response.code().toString()
             }
 
 
         })
     }
 
+
+    /** database block  */
 
     private fun insertDataToDatabase() {
         val task = Task(
@@ -98,9 +108,8 @@ class NewTaskFragment : Fragment() {
             describtion = binding.editTextDescrib.text.toString()
         )
 
-        //check that title is not empty
+        //action
         if (checkTitle()) {
-            //action
             viewModel.insert(task)
             Toast.makeText(requireContext(), R.string.new_added, Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_newTaskFragment_to_listFragment)
@@ -108,7 +117,6 @@ class NewTaskFragment : Fragment() {
             Toast.makeText(requireContext(), R.string.please_fill, Toast.LENGTH_SHORT).show()
 
         }
-
     }
 
     //check that title is not empty

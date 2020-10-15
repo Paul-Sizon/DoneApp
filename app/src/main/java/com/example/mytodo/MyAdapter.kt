@@ -3,21 +3,23 @@ package com.example.mytodo
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.Toast
+import androidx.cardview.widget.CardView
+import androidx.core.view.ViewCompat
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytodo.data.Task
 import com.example.mytodo.fragments.ListFragmentDirections
-import com.example.mytodo.network.model.Post
 import kotlinx.android.synthetic.main.items_layout.view.*
 
 
-class MyAdapter(taskEvents: TaskEvents) : ListAdapter<Task, MyAdapter.MyViewHolder>(TaskDiffCallback()) {
-    //var myDataList = ArrayList<Task>()
+class MyAdapter(taskEvents: TaskEvents) :
+    ListAdapter<Task, MyAdapter.MyViewHolder>(TaskDiffCallback()) {
+    var myDataList = listOf<Task>()
     val listener: TaskEvents = taskEvents
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
@@ -27,15 +29,20 @@ class MyAdapter(taskEvents: TaskEvents) : ListAdapter<Task, MyAdapter.MyViewHold
 
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(task: Task, listener: TaskEvents){
+
+        fun bind(task: Task, listener: TaskEvents) {
             // bind views with data
+            itemView.item_lay.transitionName = "shared_element_currentCard"
             itemView.title_item.text = task.title
             itemView.describ_item.text = task.describtion
-            itemView.checkBox.setOnClickListener { listener.onDeleteClicked(task)}
+            itemView.checkBox.setOnClickListener { listener.onDeleteClicked(task) }
+
+            //itemView.item_lay.setOnClickListener { listener.onViewClicked(task)}
 
         }
 
     }
+
 
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -45,16 +52,17 @@ class MyAdapter(taskEvents: TaskEvents) : ListAdapter<Task, MyAdapter.MyViewHold
         val currentItem = getItem(position)
         holder.bind(currentItem, listener)
 
+        holder.itemView.item_lay.transitionName = currentItem.taskId.toString()
+        ViewCompat.setTransitionName(holder.itemView.item_lay, currentItem.taskId.toString())
 
         //opens specific task (using safeargs)
         holder.itemView.item_lay.setOnClickListener {
             val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
-            holder.itemView.findNavController().navigate(action)
+            val extras =
+                FragmentNavigatorExtras(holder.itemView.item_lay to currentItem.taskId.toString())
+            holder.itemView.findNavController().navigate(action, extras)
         }
     }
-
-
-
 
 
     class TaskDiffCallback : DiffUtil.ItemCallback<Task>() {
@@ -71,6 +79,7 @@ class MyAdapter(taskEvents: TaskEvents) : ListAdapter<Task, MyAdapter.MyViewHold
 
     interface TaskEvents {
         fun onDeleteClicked(task: Task)
+       // fun onViewClicked(task: Task)
 
     }
 

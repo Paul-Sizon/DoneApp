@@ -58,19 +58,17 @@ class TaskDBViewModel(application: Application) : AndroidViewModel(application) 
     }
 
 
+
     val myResponse: MutableLiveData<Response<Post>> = MutableLiveData()
     suspend fun getPost(language: String) {
         viewModelScope.launch(Dispatchers.Main) {
-            val response = repository.getPost(language)
-            myResponse.value = response
+            try {
+                val response = repository.getPost(language)
+                myResponse.value = response
+            } catch (e: Exception){
+                Log.i("problem", "something went wrong")
 
-//            try {
-//                val response = repository.getPost(language)
-//                myResponse.value = response
-//            } catch (e: Exception){
-//                Log.i("problem", "something went wrong")
-//
-//            }
+            }
 
         }
     }

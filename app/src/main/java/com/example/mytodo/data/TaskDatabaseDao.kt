@@ -24,7 +24,7 @@ interface TaskDatabaseDao {
     fun getAllTasks(): LiveData<List<Task>>
 
     @Query("SELECT COUNT(*) FROM task_table")
-    fun getCount(): Int
+    suspend fun getCount(): Int
 
 
 

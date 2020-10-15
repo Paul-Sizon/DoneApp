@@ -15,12 +15,14 @@
             app:destination="@id/newTaskFragment" />
         <action
             android:id="@+id/action_listFragment_to_updateFragment"
-            app:destination="@id/updateFragment" />
+            app:destination="@id/updateFragment"
+            app:popExitAnim="@android:anim/fade_out" />
         <argument
             android:name="currentTask"
             app:argType="com.example.mytodo.data.Task"
             app:nullable="true"
             android:defaultValue="@null"/>
+
     </fragment>
 
     <fragment
@@ -30,7 +32,8 @@
         tools:layout="@layout/fragment_new_task">
         <action
             android:id="@+id/action_newTaskFragment_to_listFragment"
-            app:destination="@id/listFragment" />
+            app:destination="@id/listFragment"
+            app:enterAnim="@android:anim/fade_in" />
         <argument
             android:name="tasks"
             android:defaultValue=" "
@@ -43,11 +46,22 @@
         tools:layout="@layout/fragment_update" >
         <action
             android:id="@+id/action_updateFragment_to_listFragment"
-            app:destination="@id/listFragment" />
+            app:destination="@id/listFragment"
+            app:enterAnim="@anim/fragment_fade_enter" />
         <argument
             android:name="currentTask"
             app:argType="com.example.mytodo.data.Task" />
 
+
     </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.mytodo.MainActivity"
+        android:label="MainActivity"/>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.mytodo.fragments.AboutFragment"
+        android:label="About"
+        tools:layout="@layout/fragment_about" />
 
 </navigation>

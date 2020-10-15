@@ -20,8 +20,9 @@ class AboutFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_about, container, false)
+
+        // send me an email
         view.findViewById<TextView>(R.id.email_adress).setOnClickListener { sendEmail() }
 
 
@@ -35,14 +36,13 @@ class AboutFragment : Fragment() {
 
     private fun sendEmail() {
         val intent = Intent(Intent.ACTION_SEND)
-        intent.data = Uri.parse("mailto:paul.sizon@outlook.com") // only email apps should handle this
+        intent.data =
+            Uri.parse("mailto:paul.sizon@outlook.com") // only email apps should handle this
         //intent.putExtra(Intent.EXTRA_EMAIL, "")
         try {
-            //start email intent
             startActivity(Intent.createChooser(intent, "Choose Email Client..."))
-           // startActivity(intent)
-        }
-        catch (e: Exception){
+            // startActivity(intent)
+        } catch (e: Exception) {
             //if any thing goes wrong for example no email client application or any exception
             //get and show exception message
             Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()

@@ -1,17 +1,21 @@
 package com.example.mytodo.fragments
 
 import android.os.Bundle
+import android.transition.Fade
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.mytodo.R
-import com.example.mytodo.viewmodel.TaskDBViewModel
 import com.example.mytodo.data.Task
 import com.example.mytodo.databinding.FragmentUpdateBinding
+import com.example.mytodo.viewmodel.TaskDBViewModel
+import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.transition.MaterialFadeThrough
+
 
 private lateinit var binding: FragmentUpdateBinding
 
@@ -21,6 +25,13 @@ class UpdateFragment : Fragment() {
 
     private val args by navArgs<UpdateFragmentArgs>()
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = MaterialContainerTransform()
+
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,16 +43,22 @@ class UpdateFragment : Fragment() {
             container,
             false
         )
+
         viewModel = ViewModelProvider(requireActivity()).get(TaskDBViewModel::class.java)
 
+        // gives unique name to the updateFragment in order to support Material Transition for individual item in recycler view
+        binding.framelayoutUpdate.transitionName = args.currentTask.taskId.toString()
 
-
+        // sets current text
         binding.updateTitle.setText(args.currentTask.title)
         binding.updateDescrib.setText(args.currentTask.describtion)
 
+        // action
         binding.buttonUpdate.setOnClickListener {
             updateItem()
         }
+
+
 
         //menu
         setHasOptionsMenu(true)
@@ -66,7 +83,7 @@ class UpdateFragment : Fragment() {
 
     //check that title is not empty
     private fun checkTitle(): Boolean {
-        if (binding.updateTitle.text.isEmpty()) {
+        if (binding.updateTitle.text?.isEmpty()!!) {
             return false
         }
         return true

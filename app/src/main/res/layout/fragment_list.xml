@@ -2,22 +2,33 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:windowSoftInputMode="stateAlwaysHidden">
+    android:windowSoftInputMode="stateAlwaysHidden"
+
+
+
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ListFragment">
+        tools:context=".fragments.ListFragment"
+        android:background="@color/background"
 
+        >
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/items_layout" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/items_layout"
+            />
+
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
@@ -26,13 +37,18 @@
             android:layout_marginEnd="24dp"
             android:clickable="true"
             android:focusable="true"
-            android:src="@android:drawable/ic_input_add"
-            android:tint="@color/cardview_light_background"
+            android:src="@drawable/ic_baseline_add_24"
+            app:tint="#FFFFFF"
+            app:elevation="8dp"
             app:backgroundTint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.958" />
+            app:layout_constraintVertical_bias="0.958"
+            app:rippleColor="#FFFFFF"
+
+
+            android:transitionName="shared_element_container"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

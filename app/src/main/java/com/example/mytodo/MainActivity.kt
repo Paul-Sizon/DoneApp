@@ -1,18 +1,22 @@
 package com.example.mytodo
 
+
 import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.transition.Transition
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
+import android.view.View
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
+
         navController = findNavController(R.id.myNavHostFragment)
         setSupportActionBar(findViewById(R.id.my_toolbar))
         setupActionBarWithNavController(navController)
@@ -35,7 +40,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    //that can be optimised
+
+
+    /** remembers the theme  */
     private fun defaultTheme() {
         val sharedPref: SharedPreferences = getSharedPreferences(
             "SharedPrefs",
@@ -53,15 +60,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //maybe put it in utils later
 
+    /** user changes theme  */
     private fun showDialog() {
-
         val sharedPref: SharedPreferences =
             getSharedPreferences("SharedPrefs", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = sharedPref.edit()
-
-
         // Late initialize an alert dialog object
         lateinit var dialog: AlertDialog
         // Initialize an array of colors
@@ -75,33 +79,24 @@ class MainActivity : AppCompatActivity() {
             // Get the dialog selected item
             val choice = array[which]
             if (choice == "Dark") {
-                Toast.makeText(this, "it's on", Toast.LENGTH_SHORT).show()
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-
             }
             if (choice == "Light") {
-                Toast.makeText(this, "it's Off", Toast.LENGTH_SHORT).show()
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
             if (choice == "System default") {
-                Toast.makeText(this, "it's default", Toast.LENGTH_SHORT).show()
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             }
+
             editor.putString("mode", choice).apply()
-
-            // Dismiss the dialog
             dialog.dismiss()
-
         }
-
         builder.setNeutralButton("Cancel") { _, _ ->
             // Do something when click the neutral button
             dialog.cancel()
         }
-
         // Initialize the AlertDialog using builder object
         dialog = builder.create()
-
         // Finally, display the alert dialog
         dialog.show()
 
@@ -123,12 +118,12 @@ class MainActivity : AppCompatActivity() {
             item, navController
         )
                 || super.onOptionsItemSelected(item)
-
-
     }
+
 
     override fun onSupportNavigateUp(): Boolean {
         navController = findNavController(R.id.myNavHostFragment)
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
+

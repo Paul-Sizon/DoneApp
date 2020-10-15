@@ -6,9 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.mytodo.MyAdapter
@@ -17,6 +20,10 @@ import com.example.mytodo.data.Task
 import com.example.mytodo.databinding.FragmentListBinding
 import com.example.mytodo.hideKeyboard
 import com.example.mytodo.viewmodel.TaskDBViewModel
+import com.google.android.material.transition.Hold
+import com.google.android.material.transition.MaterialElevationScale
+import kotlinx.android.synthetic.main.items_layout.*
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -30,12 +37,12 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
     private val args by navArgs<ListFragmentArgs>()
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentListBinding.inflate(inflater, container, false)
-
         hideKeyboard(activity as Activity)
 
         //viewmodel
@@ -45,38 +52,28 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
         adapter = MyAdapter(this)
         val recyclerview = binding.recyclerView
         recyclerview.adapter = adapter
-
         viewModel.getAllTasks.observe(viewLifecycleOwner, { adapter.submitList(it) })
 
-
-        Log.i("lannguage", Locale.getDefault().language)
-        fun checkLanguage() {
-            if (Locale.getDefault().language == "en") {
-                Log.i("lannguage", "it's true")
-            }
-        }
-        checkLanguage()
-
-
-        //button action
+        //button action with material design motion
         binding.floatingActionButton.setOnClickListener {
+            val extras =
+                FragmentNavigatorExtras(binding.floatingActionButton to "shared_element_container")
             findNavController().navigate(
-                ListFragmentDirections.actionListFragmentToNewTaskFragment()
+                R.id.action_listFragment_to_newTaskFragment, null, null, extras
             )
 
         }
-
 
         //menu
         setHasOptionsMenu(true)
         return binding.root
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.delete, menu)
 
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_delete) {
@@ -104,9 +101,18 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
         }
     }
 
+
     override fun onDeleteClicked(task: Task) {
         viewModel.deleteOne(task)
+
     }
+
+//    override fun onViewClicked(task: Task) {
+//        val action = ListFragmentDirections.actionListFragmentToUpdateFragment(task)
+//        val extras =
+//                FragmentNavigatorExtras(binding.recyclerView to "shared_element_currentCard")
+//        findNavController().navigate(action, extras)
+//    }
 
 
 }

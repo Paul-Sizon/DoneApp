@@ -2,17 +2,24 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_lay"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
+    android:elevation="12dp"
     android:orientation="horizontal"
-    android:id="@+id/item_lay">
+
+    app:cardBackgroundColor="@color/cardview"
+
+
+
+    app:cardCornerRadius="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constr_lay_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-
 
         >
 
@@ -24,6 +31,7 @@
             android:layout_margin="4dp"
             android:paddingStart="10dp"
             android:text="Title"
+            android:textColor="@color/text"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -41,6 +49,7 @@
             android:layout_marginTop="9dp"
             android:paddingStart="10dp"
             android:text="Describtion"
+            android:textColor="@color/text"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/checkBox"
@@ -49,11 +58,12 @@
             app:layout_constraintTop_toBottomOf="@+id/title_item"
             app:layout_constraintVertical_bias="0.0" />
 
+
         <CheckBox
+
             android:id="@+id/checkBox"
-            android:layout_width="37dp"
-            android:layout_height="36dp"
-            android:button="@drawable/ic_baseline_done_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:checked="false"
             android:clickable="true"
             android:focusable="true"
