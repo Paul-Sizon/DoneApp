@@ -42,39 +42,43 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
             binding = FragmentListBinding.inflate(inflater, container, false)
 
 
-            hideKeyboard(activity as Activity)
 
-            //viewmodel
-            viewModel = ViewModelProvider(this).get(TaskDBViewModel::class.java)
-
-
-            //recyclerView
-            adapter = MyAdapter(this)
-            val recyclerview = binding.recyclerView
-            recyclerview.adapter = adapter
-
-            viewModel.getAllTasks.observe(viewLifecycleOwner, { adapter.submitList(it) })
-
-            //button action with material design motion
-            binding.floatingActionButton.setOnClickListener {
-                val extras =
-                    FragmentNavigatorExtras(binding.floatingActionButton to "shared_element_container")
-                findNavController().navigate(
-                    R.id.action_listFragment_to_newTaskFragment, null, null, extras
-                )
-
-
-            }
-
-
-            //menu
-            setHasOptionsMenu(true)
             binding.root
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        hideKeyboard(activity as Activity)
 
-        override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        //viewmodel
+        viewModel = ViewModelProvider(this).get(TaskDBViewModel::class.java)
+
+
+        //recyclerView
+        adapter = MyAdapter(this)
+        val recyclerview = binding.recyclerView
+        recyclerview.adapter = adapter
+
+        viewModel.getAllTasks.observe(viewLifecycleOwner, { adapter.submitList(it) })
+
+        //button action with material design motion
+        binding.floatingActionButton.setOnClickListener {
+            val extras =
+                FragmentNavigatorExtras(binding.floatingActionButton to "shared_element_container")
+            findNavController().navigate(
+                R.id.action_listFragment_to_newTaskFragment, null, null, extras
+            )
+
+
+        }
+
+
+        //menu
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
             inflater.inflate(R.menu.delete, menu)
 
         }
