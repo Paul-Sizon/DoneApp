@@ -15,8 +15,7 @@
             app:destination="@id/newTaskFragment" />
         <action
             android:id="@+id/action_listFragment_to_updateFragment"
-            app:destination="@id/updateFragment"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:destination="@id/updateFragment" />
         <argument
             android:name="currentTask"
             app:argType="com.example.mytodo.data.Task"

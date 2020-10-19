@@ -3,14 +3,12 @@ package com.example.mytodo.fragments
 import android.app.Activity
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.cardview.widget.CardView
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -20,12 +18,8 @@ import com.example.mytodo.data.Task
 import com.example.mytodo.databinding.FragmentListBinding
 import com.example.mytodo.hideKeyboard
 import com.example.mytodo.viewmodel.TaskDBViewModel
-import com.google.android.material.transition.Hold
-import com.google.android.material.transition.MaterialElevationScale
-import kotlinx.android.synthetic.main.items_layout.*
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.util.*
+
 
 
 open class ListFragment : Fragment(), MyAdapter.TaskEvents {
@@ -34,88 +28,99 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
     private lateinit var binding: FragmentListBinding
     private lateinit var adapter: MyAdapter
 
-    private val args by navArgs<ListFragmentArgs>()
 
+    private val args by navArgs<ListFragmentArgs>()
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentListBinding.inflate(inflater, container, false)
-        hideKeyboard(activity as Activity)
-
-        //viewmodel
-        viewModel = ViewModelProvider(this).get(TaskDBViewModel::class.java)
-
-        //recyclerView
-        adapter = MyAdapter(this)
-        val recyclerview = binding.recyclerView
-        recyclerview.adapter = adapter
-        viewModel.getAllTasks.observe(viewLifecycleOwner, { adapter.submitList(it) })
-
-        //button action with material design motion
-        binding.floatingActionButton.setOnClickListener {
-            val extras =
-                FragmentNavigatorExtras(binding.floatingActionButton to "shared_element_container")
-            findNavController().navigate(
-                R.id.action_listFragment_to_newTaskFragment, null, null, extras
-            )
-
-        }
-
-        //menu
-        setHasOptionsMenu(true)
-        return binding.root
-    }
+        return if (::binding.isInitialized) {
+            binding.root
+        } else {
+            binding = FragmentListBinding.inflate(inflater, container, false)
 
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.delete, menu)
+            hideKeyboard(activity as Activity)
 
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_delete) {
-            deleteAll()
-        }
-        return super.onOptionsItemSelected(item)
-    }
+            //viewmodel
+            viewModel = ViewModelProvider(this).get(TaskDBViewModel::class.java)
 
 
-    private fun deleteAll() = lifecycleScope.launch {
+            //recyclerView
+            adapter = MyAdapter(this)
+            val recyclerview = binding.recyclerView
+            recyclerview.adapter = adapter
 
-        val num = viewModel.getCount()
-        if (num != 0) {
+            viewModel.getAllTasks.observe(viewLifecycleOwner, { adapter.submitList(it) })
 
-            val builder = AlertDialog.Builder(requireContext())
-            builder.setPositiveButton(R.string.Yes) { _, _ ->
-                viewModel.deleteAll()
-                Toast.makeText(requireContext(), R.string.all_deleted, Toast.LENGTH_SHORT).show()
+            //button action with material design motion
+            binding.floatingActionButton.setOnClickListener {
+                val extras =
+                    FragmentNavigatorExtras(binding.floatingActionButton to "shared_element_container")
+                findNavController().navigate(
+                    R.id.action_listFragment_to_newTaskFragment, null, null, extras
+                )
+
 
             }
-            builder.setNegativeButton(R.string.No) { _, _ -> }
-            builder.setTitle(getString(R.string.delete_all))
-            builder.setMessage(getString(R.string.are_you_sure))
-            builder.create().show()
+
+
+            //menu
+            setHasOptionsMenu(true)
+            binding.root
         }
     }
 
 
-    override fun onDeleteClicked(task: Task) {
-        viewModel.deleteOne(task)
+        override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+            inflater.inflate(R.menu.delete, menu)
+
+        }
+
+        override fun onOptionsItemSelected(item: MenuItem): Boolean {
+            if (item.itemId == R.id.menu_delete) {
+                deleteAll()
+            }
+            return super.onOptionsItemSelected(item)
+        }
+
+
+        private fun deleteAll() = lifecycleScope.launch {
+
+            val num = viewModel.getCount()
+            if (num != 0) {
+
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setPositiveButton(R.string.Yes) { _, _ ->
+                    viewModel.deleteAll()
+                    Toast.makeText(requireContext(), R.string.all_deleted, Toast.LENGTH_SHORT)
+                        .show()
+
+                }
+                builder.setNegativeButton(R.string.No) { _, _ -> }
+                builder.setTitle(getString(R.string.delete_all))
+                builder.setMessage(getString(R.string.are_you_sure))
+                builder.create().show()
+            }
+        }
+
+
+        override fun onDeleteClicked(task: Task) {
+            viewModel.deleteOne(task)
+
+        }
+
+        override fun onViewClicked(task: Task, view: View) {
+            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(task)
+            val extras =
+                FragmentNavigatorExtras(view to ViewCompat.getTransitionName(view)!!)
+            findNavController().navigate(action, extras)
+        }
+
 
     }
-
-//    override fun onViewClicked(task: Task) {
-//        val action = ListFragmentDirections.actionListFragmentToUpdateFragment(task)
-//        val extras =
-//                FragmentNavigatorExtras(binding.recyclerView to "shared_element_currentCard")
-//        findNavController().navigate(action, extras)
-//    }
-
-
-}
 
 
 

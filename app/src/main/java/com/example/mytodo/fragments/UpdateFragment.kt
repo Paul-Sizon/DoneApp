@@ -1,9 +1,10 @@
 package com.example.mytodo.fragments
 
+
 import android.os.Bundle
-import android.transition.Fade
 import android.view.*
 import android.widget.Toast
+import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,7 +15,7 @@ import com.example.mytodo.data.Task
 import com.example.mytodo.databinding.FragmentUpdateBinding
 import com.example.mytodo.viewmodel.TaskDBViewModel
 import com.google.android.material.transition.MaterialContainerTransform
-import com.google.android.material.transition.MaterialFadeThrough
+
 
 
 private lateinit var binding: FragmentUpdateBinding
@@ -29,9 +30,12 @@ class UpdateFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = MaterialContainerTransform()
+        sharedElementReturnTransition = MaterialContainerTransform()
 
-
+        
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +51,7 @@ class UpdateFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity()).get(TaskDBViewModel::class.java)
 
         // gives unique name to the updateFragment in order to support Material Transition for individual item in recycler view
-        binding.framelayoutUpdate.transitionName = args.currentTask.taskId.toString()
+        ViewCompat.setTransitionName(binding.framelayoutUpdate, args.currentTask.taskId.toString())
 
         // sets current text
         binding.updateTitle.setText(args.currentTask.title)
@@ -73,6 +77,7 @@ class UpdateFragment : Fragment() {
             val updated = Task(args.currentTask.taskId, tit, desc)
             viewModel.update(updated)
             Toast.makeText(requireContext(), "Task updated", Toast.LENGTH_SHORT).show()
+
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
         } else {
             Toast.makeText(requireContext(), R.string.please_fill, Toast.LENGTH_SHORT).show()
