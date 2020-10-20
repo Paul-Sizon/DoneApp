@@ -28,7 +28,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/title"
-                android:inputType="textNoSuggestions">
+                android:inputType="textNoSuggestions"
+                app:errorEnabled="true"
+                android:id="@+id/material_text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextTitle"
@@ -42,7 +45,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/describtion"
-                android:inputType="textNoSuggestions">
+                android:inputType="textNoSuggestions"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextDescrib"
@@ -53,13 +57,14 @@
 
 
             <Button
-                android:layout_marginTop="8dp"
                 android:id="@+id/bbb"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="46dp"
+                android:layout_marginTop="8dp"
                 android:elevation="2dp"
                 android:text="@string/done_button"
-                android:textColor="#FFFFFF" />
+                android:textColor="#eeeeee"
+                android:textStyle="bold" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -69,11 +74,14 @@
 
                 <Button
                     android:id="@+id/motiv_button"
-                    android:elevation="2dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#FFFFFF"
+                    android:backgroundTint="@color/Inspiration_button"
+                    android:elevation="2dp"
                     android:text="@string/get_inspiration"
+                    android:textColor="@color/Inspiration_button_text"
+
+                    app:cornerRadius="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -106,7 +114,7 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/motiv_button"
-                    app:layout_constraintVertical_bias="0.116" />
+                    app:layout_constraintVertical_bias="0.025" />
 
                 <TextView
                     android:id="@+id/motivation_author"

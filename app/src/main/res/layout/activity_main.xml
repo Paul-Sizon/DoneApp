@@ -15,12 +15,14 @@
         android:id="@+id/my_toolbar"
         android:layout_height="?attr/actionBarSize"
         android:layout_width="match_parent"
-        app:titleTextColor="#eeeeee"
+
         android:theme="@style/ToolbarTheme"
         app:popupTheme="@style/ToolbarTheme"
-        android:animateLayoutChanges="false"
+        app:titleTextColor="#FFFFFF"
+
 
         />
+
 
     <fragment
         android:id="@+id/myNavHostFragment"

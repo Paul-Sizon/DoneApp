@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1565c0</color>
-    <color name="colorPrimaryDark">#003c8f</color>
-    <color name="colorAccent">#5e92f3</color>
+<!--    <color name="colorPrimary">#1565c0</color>-->
+<!--    <color name="colorPrimaryDark">#003c8f</color>-->
+<!--    <color name="colorAccent">#5e92f3</color>-->
+
+
+<!--    <color name="colorPrimary">#2e7c31</color>-->
+<!--    <color name="colorPrimaryDark">#004f04</color>-->
+<!--    <color name="colorAccent">#60ac5d</color>-->
+
+    <color name="colorPrimary">#0ABF9A</color>
+    <color name="colorPrimaryDark">#01916F</color>
+    <color name="colorAccent">#62DFC6</color>
+
+<!--    <color name="colorPrimary">#009f79</color>-->
+<!--    <color name="colorPrimaryDark">#09d1a8</color>-->
+<!--    <color name="colorAccent">#62DFC6</color>-->
+
+    <color name="Inspiration_button_text">#CD3C504E</color>
+    <color name="Inspiration_button">#62DFC6</color>
+
+    <color name="motiv_text">#CD3C504E</color>
+
+    <color name="secondary">#ffc518</color>
 
     <color name="background">#eeeeee</color>
     <color name="cardview">#FFFFFF</color>
-    <color name="text">#000000</color>
+    <color name="text">#C4192524</color>
 </resources>

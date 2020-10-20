@@ -19,7 +19,7 @@ import com.example.mytodo.databinding.FragmentListBinding
 import com.example.mytodo.hideKeyboard
 import com.example.mytodo.viewmodel.TaskDBViewModel
 import kotlinx.coroutines.launch
-
+import java.lang.Thread.sleep
 
 
 open class ListFragment : Fragment(), MyAdapter.TaskEvents {
@@ -41,7 +41,27 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
         } else {
             binding = FragmentListBinding.inflate(inflater, container, false)
 
+            //viewmodel
+            viewModel = ViewModelProvider(this).get(TaskDBViewModel::class.java)
 
+
+            //recyclerView
+            adapter = MyAdapter(this)
+            val recyclerview = binding.recyclerView
+            recyclerview.adapter = adapter
+
+            viewModel.getAllTasks.observe(viewLifecycleOwner, { adapter.submitList(it) })
+
+            //button action with material design motion
+            binding.floatingActionButton.setOnClickListener {
+                val extras =
+                    FragmentNavigatorExtras(binding.floatingActionButton to "shared_element_container")
+                findNavController().navigate(
+                    R.id.action_listFragment_to_newTaskFragment, null, null, extras
+                )
+
+
+            }
 
             binding.root
         }
@@ -51,80 +71,61 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
         super.onViewCreated(view, savedInstanceState)
         hideKeyboard(activity as Activity)
 
-        //viewmodel
-        viewModel = ViewModelProvider(this).get(TaskDBViewModel::class.java)
-
-
-        //recyclerView
-        adapter = MyAdapter(this)
-        val recyclerview = binding.recyclerView
-        recyclerview.adapter = adapter
-
-        viewModel.getAllTasks.observe(viewLifecycleOwner, { adapter.submitList(it) })
-
-        //button action with material design motion
-        binding.floatingActionButton.setOnClickListener {
-            val extras =
-                FragmentNavigatorExtras(binding.floatingActionButton to "shared_element_container")
-            findNavController().navigate(
-                R.id.action_listFragment_to_newTaskFragment, null, null, extras
-            )
-
-
-        }
-
-
         //menu
         setHasOptionsMenu(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-            inflater.inflate(R.menu.delete, menu)
-
-        }
-
-        override fun onOptionsItemSelected(item: MenuItem): Boolean {
-            if (item.itemId == R.id.menu_delete) {
-                deleteAll()
-            }
-            return super.onOptionsItemSelected(item)
-        }
-
-
-        private fun deleteAll() = lifecycleScope.launch {
-
-            val num = viewModel.getCount()
-            if (num != 0) {
-
-                val builder = AlertDialog.Builder(requireContext())
-                builder.setPositiveButton(R.string.Yes) { _, _ ->
-                    viewModel.deleteAll()
-                    Toast.makeText(requireContext(), R.string.all_deleted, Toast.LENGTH_SHORT)
-                        .show()
-
-                }
-                builder.setNegativeButton(R.string.No) { _, _ -> }
-                builder.setTitle(getString(R.string.delete_all))
-                builder.setMessage(getString(R.string.are_you_sure))
-                builder.create().show()
-            }
-        }
-
-
-        override fun onDeleteClicked(task: Task) {
-            viewModel.deleteOne(task)
-
-        }
-
-        override fun onViewClicked(task: Task, view: View) {
-            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(task)
-            val extras =
-                FragmentNavigatorExtras(view to ViewCompat.getTransitionName(view)!!)
-            findNavController().navigate(action, extras)
-        }
-
+        inflater.inflate(R.menu.delete, menu)
 
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menu_delete) {
+            deleteAll()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
+    private fun deleteAll() = lifecycleScope.launch {
+
+        val num = viewModel.getCount()
+        if (num != 0) {
+
+            val builder = AlertDialog.Builder(requireContext())
+            builder.setPositiveButton(R.string.Yes) { _, _ ->
+                viewModel.deleteAll()
+                Toast.makeText(requireContext(), R.string.all_deleted, Toast.LENGTH_SHORT)
+                    .show()
+
+            }
+            builder.setNegativeButton(R.string.No) { _, _ -> }
+            builder.setTitle(getString(R.string.delete_all))
+            builder.setMessage(getString(R.string.are_you_sure))
+            builder.create().show()
+        }
+    }
+
+
+    override fun onDeleteClicked(task: Task, view: View) {
+        viewModel.deleteOne(task)
+
+        /**put it on different coroutine? */
+        sleep(300)
+        view.visibility = View.GONE
+
+    }
+
+    override fun onViewClicked(task: Task, view: View) {
+        val action = ListFragmentDirections.actionListFragmentToUpdateFragment(task)
+        val extras =
+            FragmentNavigatorExtras(view to ViewCompat.getTransitionName(view)!!)
+        findNavController().navigate(action, extras)
+    }
+
+
+}
 
 
 
