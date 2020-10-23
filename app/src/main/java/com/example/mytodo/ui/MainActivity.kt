@@ -1,22 +1,19 @@
-package com.example.mytodo
+package com.example.mytodo.ui
 
 
 import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.transition.Transition
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.mytodo.R
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,19 +25,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
         navController = findNavController(R.id.myNavHostFragment)
         setSupportActionBar(findViewById(R.id.my_toolbar))
         setupActionBarWithNavController(navController)
 
-
         defaultTheme()
-
-
     }
-
-
 
     /** remembers the theme  */
     private fun defaultTheme() {
@@ -59,7 +49,6 @@ class MainActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         }
     }
-
 
     /** user changes theme  */
     private fun showDialog() {
@@ -102,12 +91,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_etc, menu)
         return true
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.night_mode) {
@@ -120,10 +107,8 @@ class MainActivity : AppCompatActivity() {
                 || super.onOptionsItemSelected(item)
     }
 
-
     override fun onSupportNavigateUp(): Boolean {
         navController = findNavController(R.id.myNavHostFragment)
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
-

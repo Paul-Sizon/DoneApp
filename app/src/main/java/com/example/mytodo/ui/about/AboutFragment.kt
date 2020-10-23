@@ -1,4 +1,4 @@
-package com.example.mytodo.fragments
+package com.example.mytodo.ui.about
 
 import android.content.Intent
 import android.net.Uri

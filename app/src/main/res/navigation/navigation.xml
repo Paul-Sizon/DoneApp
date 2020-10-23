@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.mytodo.fragments.ListFragment"
+        android:name="com.example.mytodo.ui.list.ListFragment"
         android:label="@string/list"
         tools:layout="@layout/fragment_list">
         <action
@@ -18,7 +18,7 @@
             app:destination="@id/updateFragment" />
         <argument
             android:name="currentTask"
-            app:argType="com.example.mytodo.data.Task"
+            app:argType="com.example.mytodo.data.db.entity.Task"
             app:nullable="true"
             android:defaultValue="@null"/>
 
@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/newTaskFragment"
-        android:name="com.example.mytodo.fragments.NewTaskFragment"
+        android:name="com.example.mytodo.ui.task.NewTaskFragment"
         android:label="@string/add_new_task"
         tools:layout="@layout/fragment_new_task">
         <action
@@ -49,17 +49,17 @@
             app:enterAnim="@anim/fragment_fade_enter" />
         <argument
             android:name="currentTask"
-            app:argType="com.example.mytodo.data.Task" />
+            app:argType="com.example.mytodo.data.db.entity.Task" />
 
 
     </fragment>
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.example.mytodo.MainActivity"
+        android:name="com.example.mytodo.ui.MainActivity"
         android:label="MainActivity"/>
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.example.mytodo.fragments.AboutFragment"
+        android:name="com.example.mytodo.ui.about.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about" />
 

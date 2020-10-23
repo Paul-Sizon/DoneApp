@@ -14,9 +14,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 import java.util.*
 
-
-
-
 private const val BASE_URL = "https://api.forismatic.com/"
 //    "https://api.forismatic.com"
     //"https://api.quotable.io/"
@@ -46,7 +43,7 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 
-object retroApi {
+object RetroApi {
     val api : SimpleApi by lazy {
         retrofit.create(SimpleApi::class.java) }
 }

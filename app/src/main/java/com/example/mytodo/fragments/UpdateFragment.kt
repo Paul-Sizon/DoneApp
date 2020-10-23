@@ -7,22 +7,21 @@ import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.mytodo.R
-import com.example.mytodo.data.Task
+import com.example.mytodo.data.db.entity.Task
 import com.example.mytodo.databinding.FragmentUpdateBinding
 import com.example.mytodo.viewmodel.TaskDBViewModel
 import com.google.android.material.transition.MaterialContainerTransform
 
-
-
-private lateinit var binding: FragmentUpdateBinding
-
-private lateinit var viewModel: TaskDBViewModel
-
 class UpdateFragment : Fragment() {
+
+    private lateinit var binding: FragmentUpdateBinding
+
+    private val viewModel: TaskDBViewModel by viewModels()
 
     private val args by navArgs<UpdateFragmentArgs>()
 

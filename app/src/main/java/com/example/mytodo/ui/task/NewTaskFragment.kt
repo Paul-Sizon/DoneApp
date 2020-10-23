@@ -1,37 +1,34 @@
-package com.example.mytodo.fragments
+package com.example.mytodo.ui.task
 
 import android.os.Bundle
-import android.os.SystemClock.sleep
-import android.transition.Fade
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.mytodo.R
-import com.example.mytodo.data.Task
+import com.example.mytodo.Utils
+import com.example.mytodo.data.db.entity.Task
 import com.example.mytodo.databinding.FragmentNewTaskBinding
-import com.example.mytodo.hasNetworkAvailable
 import com.example.mytodo.viewmodel.TaskDBViewModel
 import com.google.android.material.transition.MaterialContainerTransform
-import com.google.android.material.transition.MaterialFadeThrough
 import kotlinx.coroutines.launch
 import java.util.*
 
-
 class NewTaskFragment : Fragment() {
+
     private lateinit var binding: FragmentNewTaskBinding
-    private lateinit var viewModel: TaskDBViewModel
+    private val viewModel: TaskDBViewModel by activityViewModels()
 
     //private val TAG = "MyFragment"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = MaterialContainerTransform()
-
     }
 
     override fun onCreateView(
@@ -44,8 +41,6 @@ class NewTaskFragment : Fragment() {
             container,
             false
         )
-
-        viewModel = ViewModelProvider(requireActivity()).get(TaskDBViewModel::class.java)
 
         // inspirational phrase
         binding.motivButton.setOnClickListener {
@@ -65,12 +60,12 @@ class NewTaskFragment : Fragment() {
 
     /** inspirational phrase block  */
 
-    fun checkInternet() {
-        if (hasNetworkAvailable()) {
+    private fun checkInternet() {
+        if (Utils.hasNetworkAvailable()) {
             insertMotivation()
         } else {
-            binding.motivationText.text = "Please Connect to the Internet to see the quote"
-            binding.motivationAuthor.text = "Confucius"
+            binding.motivationText.text = getString(R.string.task_msg_please_connect_to_internet)
+            binding.motivationAuthor.text = getString(R.string.task_msg_confucius)
             binding.progressBar.visibility = View.GONE
 
         }
