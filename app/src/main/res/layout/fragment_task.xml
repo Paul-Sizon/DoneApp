@@ -9,55 +9,53 @@
 
     <FrameLayout
 
+        android:id="@+id/ltRoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background"
-        tools:context=".ui.task.NewTaskFragment"
 
-        >
+        tools:context=".ui.task.TaskFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_margin="10dp"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:orientation="vertical">
 
 
             <com.google.android.material.textfield.TextInputLayout
 
+                android:id="@+id/material_text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/title"
                 android:inputType="textNoSuggestions"
-                app:errorEnabled="true"
-                android:id="@+id/material_text"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                app:errorEnabled="true">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
 
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/describtion"
-                android:inputType="textNoSuggestions"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                android:inputType="textNoSuggestions">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextDescrib"
+                    android:id="@+id/etDiscription"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <Button
-                android:id="@+id/bbb"
+                android:id="@+id/btnUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:layout_marginTop="8dp"
@@ -73,7 +71,7 @@
 
 
                 <Button
-                    android:id="@+id/motiv_button"
+                    android:id="@+id/btnMotivation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/Inspiration_button"
@@ -89,7 +87,7 @@
                     app:layout_constraintVertical_bias="0.239" />
 
                 <ProgressBar
-                    android:id="@+id/progress_bar"
+                    android:id="@+id/pbProgress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:indeterminate="true"
@@ -97,11 +95,11 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/motiv_button"
+                    app:layout_constraintTop_toBottomOf="@+id/btnMotivation"
                     app:layout_constraintVertical_bias="0.173" />
 
                 <TextView
-                    android:id="@+id/motivation_text"
+                    android:id="@+id/tvMotivation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -113,7 +111,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/motiv_button"
+                    app:layout_constraintTop_toBottomOf="@+id/btnMotivation"
                     app:layout_constraintVertical_bias="0.025" />
 
                 <TextView
@@ -128,7 +126,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/motivation_text"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMotivation"
                     app:layout_constraintVertical_bias="0.087" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

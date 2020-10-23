@@ -24,12 +24,6 @@ class AboutFragment : Fragment() {
 
         // send me an email
         view.findViewById<TextView>(R.id.email_adress).setOnClickListener { sendEmail() }
-
-
-
-
-
-
         return view
     }
 

@@ -19,8 +19,6 @@ import com.example.mytodo.R
 import com.example.mytodo.Utils
 import com.example.mytodo.data.db.entity.Task
 import com.example.mytodo.databinding.FragmentListBinding
-import com.example.mytodo.fragments.ListFragmentArgs
-import com.example.mytodo.fragments.ListFragmentDirections
 import com.example.mytodo.viewmodel.TaskDBViewModel
 import kotlinx.coroutines.launch
 
@@ -31,8 +29,6 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
     private lateinit var binding: FragmentListBinding
     private lateinit var adapter: MyAdapter
 
-    private val args by navArgs<ListFragmentArgs>()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,22 +36,12 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
         postponeEnterTransition()
         binding = FragmentListBinding.inflate(inflater, container, false)
 
-
         //recyclerView
         adapter = MyAdapter(this)
         val recyclerview = binding.recyclerView
         recyclerview.adapter = adapter
 
-        viewModel.getAllTasks.observe(viewLifecycleOwner, { adapter.submitList(it) })
-
         //button action with material design motion
-        binding.floatingActionButton.setOnClickListener {
-            val extras =
-                FragmentNavigatorExtras(binding.floatingActionButton to "shared_element_container")
-            findNavController().navigate(
-                R.id.action_listFragment_to_newTaskFragment, null, null, extras
-            )
-        }
         binding.root.doOnPreDraw {
             startPostponedEnterTransition()
         }
@@ -65,18 +51,32 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Utils.hideKeyboard(activity as Activity)
-
         //menu
         setHasOptionsMenu(true)
     }
 
-    private fun subscribeObservers() {
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        subscribeUi()
+        subscribeObservers()
+    }
 
+    private fun subscribeUi() {
+        binding.floatingActionButton.setOnClickListener {
+            val extras =
+                FragmentNavigatorExtras(binding.floatingActionButton to "shared_element_container")
+            findNavController().navigate(
+                R.id.action_listFragment_to_newTaskFragment, null, null, extras
+            )
+        }
+    }
+
+    private fun subscribeObservers() {
+        viewModel.getAllTasks.observe(viewLifecycleOwner, { adapter.submitList(it) })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.delete, menu)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -87,7 +87,6 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
     }
 
     private fun deleteAll() = lifecycleScope.launch {
-
         val num = viewModel.getCount()
         if (num != 0) {
 
@@ -110,9 +109,13 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
     }
 
     override fun onViewClicked(task: Task, view: View) {
-        val action = ListFragmentDirections.actionListFragmentToUpdateFragment(task)
-        val extras =
-            FragmentNavigatorExtras(view to ViewCompat.getTransitionName(view)!!)
-        findNavController().navigate(action, extras)
+        val navController = findNavController()
+        val action = ListFragmentDirections.actionListFragmentToNewTaskFragment(task)
+        val transitionName = ViewCompat.getTransitionName(view) ?: return
+        val extras = FragmentNavigatorExtras(view to transitionName)
+
+        if (navController.currentDestination?.id == R.id.listFragment) {
+            navController.navigate(action, extras)
+        }
     }
 }

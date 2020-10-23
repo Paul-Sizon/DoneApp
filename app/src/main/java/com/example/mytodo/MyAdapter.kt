@@ -14,8 +14,7 @@ import kotlinx.android.synthetic.main.items_layout.view.*
 class MyAdapter(taskEvents: TaskEvents) :
     ListAdapter<Task, MyAdapter.MyViewHolder>(TaskDiffCallback()) {
     var myDataList = listOf<Task>()
-    val listener: TaskEvents = taskEvents
-
+    private val listener: TaskEvents = taskEvents
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
@@ -23,29 +22,23 @@ class MyAdapter(taskEvents: TaskEvents) :
         )
     }
 
-
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(task: Task, listener: TaskEvents) = with(itemView) {
             // bind views with data
             itemView.title_item.text = task.title
-            itemView.describ_item.text = task.describtion
+            itemView.describ_item.text = task.description
             itemView.checkBox.setOnClickListener { listener.onDeleteClicked(task, itemView) }
 
             ViewCompat.setTransitionName(itemView.item_lay, task.taskId.toString())
             itemView.item_lay.setOnClickListener { listener.onViewClicked(task, itemView.item_lay) }
-
         }
-
     }
-
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = getItem(position)
         holder.bind(currentItem, listener)
-
     }
-
 
     class TaskDiffCallback : DiffUtil.ItemCallback<Task>() {
         override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
@@ -55,7 +48,6 @@ class MyAdapter(taskEvents: TaskEvents) :
         override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
             return oldItem == newItem
         }
-
     }
 
 
@@ -63,7 +55,5 @@ class MyAdapter(taskEvents: TaskEvents) :
         fun onDeleteClicked(task: Task, view: View)
         fun onViewClicked(task: Task, view: View)
     }
-
-
 }
 

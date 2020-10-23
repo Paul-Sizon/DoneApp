@@ -7,22 +7,28 @@ import androidx.lifecycle.*
 import com.example.mytodo.data.db.entity.Task
 import com.example.mytodo.data.db.TaskDatabase
 import com.example.mytodo.data.TaskRepository
-import com.example.mytodo.network.model.Post
+import com.example.mytodo.network.model.Motivation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Response
+import retrofit2.HttpException
+import java.io.IOException
+import java.net.UnknownHostException
 
 
 class TaskDBViewModel(application: Application) : AndroidViewModel(application) {
+
     val getAllTasks: LiveData<List<Task>>
+
     private val repository: TaskRepository
+    val motivationLive: MutableLiveData<Motivation> = MutableLiveData()
 
     init {
         val taskDatabaseDao = TaskDatabase.getDatabase(application).taskDatabaseDao()
         repository = TaskRepository(taskDatabaseDao)
         getAllTasks = repository.getAllTasks
     }
+
 
     fun insert(task: Task) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -52,15 +58,17 @@ class TaskDBViewModel(application: Application) : AndroidViewModel(application) 
         repository.getCount()
     }
 
-
-    val myResponse: MutableLiveData<Response<Post>> = MutableLiveData()
-    suspend fun getPost(language: String) {
-        viewModelScope.launch(Dispatchers.Default) {
-            val response = repository.getPost(language)
-            if (response.isSuccessful) {
-
-            } else {
-                val error = response.errorBody()
+    fun getMotivation(language: String) = viewModelScope.launch(Dispatchers.Default) {
+        try {
+            val response = repository.getMotivation(language)
+            motivationLive.postValue(response.body())
+        } catch (throwable: Throwable) {
+            when (throwable) {
+                is IOException -> {
+                    val code = throwable
+                    Log.e("TaskViewModel", throwable.message.toString())
+                    motivationLive.postValue(null)
+                }
             }
         }
     }

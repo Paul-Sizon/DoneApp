@@ -20,14 +20,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        navController = findNavController(R.id.myNavHostFragment)
-        setSupportActionBar(findViewById(R.id.my_toolbar))
-        setupActionBarWithNavController(navController)
+//        navController = findNavController(R.id.myNavHostFragment)
+//        setSupportActionBar(findViewById(R.id.my_toolbar))
+//        setupActionBarWithNavController(navController)
 
         defaultTheme()
     }
@@ -99,12 +98,11 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.night_mode) {
             showDialog()
-
         }
         return NavigationUI.onNavDestinationSelected(
-            item, navController
-        )
-                || super.onOptionsItemSelected(item)
+            item,
+            navController
+        ) || super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {
