@@ -1,4 +1,4 @@
-package com.example.mytodo.data
+package com.example.mytodo.data.db.entity
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
@@ -10,11 +10,11 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "task_table")
 data class Task (
     @PrimaryKey(autoGenerate = true)
-    var taskId: Long = 0L,
+    var taskId: Int = 0,
 
     @ColumnInfo(name = "title_task")
     var title: String = "",
 
     @ColumnInfo(name = "describtion_task")
-    var describtion: String = ""
+    var description: String = ""
 ): Parcelable

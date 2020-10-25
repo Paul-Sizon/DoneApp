@@ -2,27 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    >
-<!-- The NavHostFragment within the activity_main layout -->
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!-- The NavHostFragment within the activity_main layout -->
 
     <androidx.appcompat.widget.Toolbar
-
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        android:id="@+id/my_toolbar"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_width="match_parent"
-
         android:theme="@style/ToolbarTheme"
         app:popupTheme="@style/ToolbarTheme"
-        app:titleTextColor="#FFFFFF"
-
-
-        />
-
+        app:titleTextColor="#FFFFFF" />
 
     <fragment
         android:id="@+id/myNavHostFragment"
@@ -32,9 +25,4 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/navigation"
         tools:context=".ui.MainActivity" />
-
-
-
-
-
 </LinearLayout>

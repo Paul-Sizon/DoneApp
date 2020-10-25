@@ -20,18 +20,14 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         navController = findNavController(R.id.myNavHostFragment)
         setSupportActionBar(findViewById(R.id.my_toolbar))
         setupActionBarWithNavController(navController)
-
     }
-
 
     /** user changes theme  */
     private fun showDialog() {
@@ -64,35 +60,33 @@ class MainActivity : AppCompatActivity() {
             dialog.dismiss()
         }
         builder.setNeutralButton("Cancel") { _, _ ->
+            // Do something when click the neutral button
             dialog.cancel()
         }
+        // Initialize the AlertDialog using builder object
         dialog = builder.create()
+        // Finally, display the alert dialog
         dialog.show()
 
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_etc, menu)
         return true
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.night_mode) {
             showDialog()
-
         }
         return NavigationUI.onNavDestinationSelected(
-            item, navController
-        )
-                || super.onOptionsItemSelected(item)
+            item,
+            navController
+        ) || super.onOptionsItemSelected(item)
     }
-
 
     override fun onSupportNavigateUp(): Boolean {
         navController = findNavController(R.id.myNavHostFragment)
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
-

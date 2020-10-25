@@ -2,8 +2,9 @@ package com.example.mytodo.data
 
 import androidx.lifecycle.LiveData
 import com.example.mytodo.data.db.TaskDatabaseDao
-import com.example.mytodo.network.model.Post
-import com.example.mytodo.network.retroApi
+import com.example.mytodo.data.db.entity.Task
+import com.example.mytodo.network.model.Motivation
+import com.example.mytodo.network.RetroApi
 import retrofit2.Response
 
 class TaskRepository(private val taskDao: TaskDatabaseDao) {
@@ -32,8 +33,8 @@ class TaskRepository(private val taskDao: TaskDatabaseDao) {
         return taskDao.getCount()
     }
 
-    suspend fun getPost(language: String): Response<Post> {
-        return retroApi.api.getPost(language)
+    suspend fun getMotivation(language: String): Response<Motivation> {
+        return RetroApi.api.getMotivation(language)
     }
 
 }

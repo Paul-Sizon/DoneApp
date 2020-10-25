@@ -1,21 +1,13 @@
 package com.example.mytodo.network
 
-import android.util.Log
-import com.example.mytodo.network.model.Post
+import com.example.mytodo.network.model.Motivation
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
-import java.util.*
-
-
-
 
 private const val BASE_URL = "https://api.forismatic.com/"
 //    "https://api.forismatic.com"
@@ -33,9 +25,9 @@ interface SimpleApi {
 // @GET("random?tags=inspirational")
 
   @GET("api/1.0/?method=getQuote&format=json&json=?")
-    suspend fun getPost(
+    suspend fun getMotivation(
       @Query("lang") language: String
-  ): Response<Post>
+  ): Response<Motivation>
 
 }
 
@@ -46,7 +38,7 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 
-object retroApi {
+object RetroApi {
     val api : SimpleApi by lazy {
         retrofit.create(SimpleApi::class.java) }
 }

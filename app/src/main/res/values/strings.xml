@@ -20,11 +20,8 @@
     <string name="done_button">ADD</string>
     <string name="get_inspiration">Get Inspiration</string>
     <string name="list">List</string>
-    <string name="internet_connect">Please connect to the Internet to see the quote.</string>
-    <string name="confucius">Confucius</string>
-    <string name="light">Light</string>
-    <string name="theme">Theme</string>
-    <string name="about">About</string>
+    <string name="task_msg_please_connect_to_internet">Please Connect to the Internet to see the quote</string>
+    <string name="task_msg_confucius">Confucius</string>
 
 
 </resources>

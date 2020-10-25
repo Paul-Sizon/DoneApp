@@ -17,9 +17,6 @@
     <string name="please_fill">Por favor complete el titulo</string>
     <string name="all_deleted">Todas las tareas eliminadas</string>
     <string name="task_updated">Tarea actualizada</string>
-    <string name="internet_connect">Conéctese a Internet para ver la frase</string>
-    <string name="confucius">Confucio</string>
-    <string name="light">Ligero</string>
-    <string name="theme">Tema</string>
-    <string name="about">About</string>
+    <string name="task_msg_please_connect_to_internet">Please Connect to the Internet to see the quote</string>
+    <string name="task_msg_confucius">Confucius</string>
 </resources>
