@@ -3,6 +3,7 @@ package com.example.mytodo.ui.task
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
@@ -10,6 +11,7 @@ import com.example.mytodo.R
 import com.example.mytodo.data.db.entity.Task
 import com.example.mytodo.databinding.FragmentTaskBinding
 import com.example.mytodo.viewmodel.TaskDBViewModel
+import com.google.android.material.transition.MaterialContainerTransform
 import java.util.*
 
 
@@ -23,8 +25,8 @@ class TaskFragment : Fragment() {
     //private val TAG = "MyFragment"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        sharedElementEnterTransition = MaterialContainerTransform()
-//        sharedElementReturnTransition = MaterialContainerTransform()
+        sharedElementEnterTransition = MaterialContainerTransform()
+        sharedElementReturnTransition = MaterialContainerTransform()
     }
 
     override fun onCreateView(
@@ -32,7 +34,9 @@ class TaskFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTaskBinding.inflate(inflater, container, false)
-//        ViewCompat.setTransitionName(binding.ltRoot, args.task?.taskId.toString())
+        if (args.task != null) {
+            ViewCompat.setTransitionName(binding.ltRoot, args.task?.taskId.toString())
+        }
         return binding.root
     }
 

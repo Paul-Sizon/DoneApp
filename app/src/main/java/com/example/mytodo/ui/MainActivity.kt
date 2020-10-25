@@ -24,29 +24,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        navController = findNavController(R.id.myNavHostFragment)
-//        setSupportActionBar(findViewById(R.id.my_toolbar))
-//        setupActionBarWithNavController(navController)
-
-        defaultTheme()
-    }
-
-    /** remembers the theme  */
-    private fun defaultTheme() {
-        val sharedPref: SharedPreferences = getSharedPreferences(
-            "SharedPrefs",
-            Context.MODE_PRIVATE
-        )
-        val mode = sharedPref.getString("mode", "")
-        if (mode == "Dark") {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }
-        if (mode == "Light") {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
-        if (mode == "System default") {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-        }
+        navController = findNavController(R.id.myNavHostFragment)
+        setSupportActionBar(findViewById(R.id.my_toolbar))
+        setupActionBarWithNavController(navController)
     }
 
     /** user changes theme  */
