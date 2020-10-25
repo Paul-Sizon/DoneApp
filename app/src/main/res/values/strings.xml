@@ -22,6 +22,9 @@
     <string name="list">List</string>
     <string name="task_msg_please_connect_to_internet">Please Connect to the Internet to see the quote</string>
     <string name="task_msg_confucius">Confucius</string>
+    <string name="theme">Theme</string>
+    <string name="about">About</string>
+    <string name="error_empty_title">title must not be empty</string>
 
 
 </resources>

@@ -114,7 +114,7 @@ class TaskFragment : Fragment() {
             Toast.makeText(requireContext(), R.string.new_added, Toast.LENGTH_SHORT).show()
             requireActivity().onBackPressed()
         } else {
-            Toast.makeText(requireContext(), R.string.please_fill, Toast.LENGTH_SHORT).show()
+            binding.materialText.error = getString(R.string.error_empty_title)
         }
     }
 
@@ -139,7 +139,7 @@ class TaskFragment : Fragment() {
 
             requireActivity().onBackPressed()
         } else {
-            Toast.makeText(requireContext(), R.string.please_fill, Toast.LENGTH_SHORT).show()
+            binding.materialText.error = getString(R.string.error_empty_title)
 
         }
     }
