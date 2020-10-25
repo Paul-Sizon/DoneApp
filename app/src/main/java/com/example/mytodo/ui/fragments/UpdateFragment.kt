@@ -1,4 +1,4 @@
-package com.example.mytodo.fragments
+package com.example.mytodo.ui.fragments
 
 
 import android.os.Bundle
@@ -11,9 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.mytodo.R
+import com.example.mytodo.checksTitle
 import com.example.mytodo.data.Task
 import com.example.mytodo.databinding.FragmentUpdateBinding
-import com.example.mytodo.viewmodel.TaskDBViewModel
+import com.example.mytodo.ui.TaskDBViewModel
 import com.google.android.material.transition.MaterialContainerTransform
 
 
@@ -73,26 +74,17 @@ class UpdateFragment : Fragment() {
         val tit = binding.updateTitle.text.toString()
         val desc = binding.updateDescrib.text.toString()
 
-        if (checkTitle()) {
+        if (checksTitle(binding.updateTitle, binding.materialUpdateText)) {
             val updated = Task(args.currentTask.taskId, tit, desc)
             viewModel.update(updated)
             Toast.makeText(requireContext(), "Task updated", Toast.LENGTH_SHORT).show()
 
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
-        } else {
-            Toast.makeText(requireContext(), R.string.please_fill, Toast.LENGTH_SHORT).show()
-
         }
 
     }
 
-    //check that title is not empty
-    private fun checkTitle(): Boolean {
-        if (binding.updateTitle.text?.isEmpty()!!) {
-            return false
-        }
-        return true
-    }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.delete, menu)

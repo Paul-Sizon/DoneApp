@@ -1,4 +1,4 @@
-package com.example.mytodo.fragments
+package com.example.mytodo.ui.fragments
 
 import android.content.Intent
 import android.net.Uri
@@ -23,12 +23,8 @@ class AboutFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_about, container, false)
 
         // send me an email
-        view.findViewById<TextView>(R.id.email_adress).setOnClickListener { sendEmail() }
-
-
-
-
-
+        view.findViewById<TextView>(R.id.email_adress).setOnClickListener { sendEmail()
+        }
 
         return view
     }
@@ -37,14 +33,12 @@ class AboutFragment : Fragment() {
     private fun sendEmail() {
         val intent = Intent(Intent.ACTION_SEND)
         intent.data =
-            Uri.parse("mailto:paul.sizon@outlook.com") // only email apps should handle this
+            Uri.parse("mailto:paul.sizon@outlook.com")
         //intent.putExtra(Intent.EXTRA_EMAIL, "")
         try {
             startActivity(Intent.createChooser(intent, "Choose Email Client..."))
             // startActivity(intent)
         } catch (e: Exception) {
-            //if any thing goes wrong for example no email client application or any exception
-            //get and show exception message
             Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
         }
     }

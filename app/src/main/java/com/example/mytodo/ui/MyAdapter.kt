@@ -1,4 +1,4 @@
-package com.example.mytodo
+package com.example.mytodo.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mytodo.R
 import com.example.mytodo.data.Task
 import kotlinx.android.synthetic.main.items_layout.view.*
 
@@ -30,10 +31,13 @@ class MyAdapter(taskEvents: TaskEvents) :
             // bind views with data
             itemView.title_item.text = task.title
             itemView.describ_item.text = task.describtion
-            itemView.checkBox.setOnClickListener { listener.onDeleteClicked(task) }
+
+
+            itemView.checkBox.setOnCheckedChangeListener { _, _ -> listener.onDeleteClicked(task, itemView.item_lay)  }
+
 
             ViewCompat.setTransitionName(itemView.item_lay, task.taskId.toString())
-            itemView.item_lay.setOnClickListener { listener.onViewClicked(task, itemView.item_lay)}
+            itemView.item_lay.setOnClickListener { listener.onViewClicked(task, itemView.item_lay) }
 
         }
 
@@ -61,8 +65,8 @@ class MyAdapter(taskEvents: TaskEvents) :
 
 
     interface TaskEvents {
-        fun onDeleteClicked(task: Task)
-         fun onViewClicked(task: Task, view: View)
+        fun onDeleteClicked(task: Task, view: View)
+        fun onViewClicked(task: Task, view: View)
 
     }
 

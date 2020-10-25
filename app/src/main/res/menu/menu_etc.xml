@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/night_mode"
-        android:title="Night"
+        android:title="@string/theme"
         app:showAsAction="withText">
 
     </item>
@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/aboutFragment"
-        android:title="About"
+        android:title="@string/about"
         app:showAsAction="never" >
 
     </item>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.example.mytodo.fragments.ListFragment"
+        android:name="com.example.mytodo.ui.fragments.ListFragment"
         android:label="@string/list"
         tools:layout="@layout/fragment_list">
         <action
@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/newTaskFragment"
-        android:name="com.example.mytodo.fragments.NewTaskFragment"
+        android:name="com.example.mytodo.ui.fragments.NewTaskFragment"
         android:label="@string/add_new_task"
         tools:layout="@layout/fragment_new_task">
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/updateFragment"
-        android:name="com.example.mytodo.fragments.UpdateFragment"
+        android:name="com.example.mytodo.ui.fragments.UpdateFragment"
         android:label="@string/edit_task"
         tools:layout="@layout/fragment_update" >
         <action
@@ -55,11 +55,11 @@
     </fragment>
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.example.mytodo.MainActivity"
+        android:name="com.example.mytodo.ui.MainActivity"
         android:label="MainActivity"/>
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.example.mytodo.fragments.AboutFragment"
+        android:name="com.example.mytodo.ui.fragments.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about" />
 

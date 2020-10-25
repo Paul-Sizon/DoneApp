@@ -1,22 +1,19 @@
-package com.example.mytodo
+package com.example.mytodo.ui
 
 
 import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.transition.Transition
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.mytodo.R
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,35 +26,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-
         navController = findNavController(R.id.myNavHostFragment)
         setSupportActionBar(findViewById(R.id.my_toolbar))
         setupActionBarWithNavController(navController)
 
-
-        defaultTheme()
-
-
-    }
-
-
-
-    /** remembers the theme  */
-    private fun defaultTheme() {
-        val sharedPref: SharedPreferences = getSharedPreferences(
-            "SharedPrefs",
-            Context.MODE_PRIVATE
-        )
-        val mode = sharedPref.getString("mode", "")
-        if (mode == "Dark") {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }
-        if (mode == "Light") {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
-        if (mode == "System default") {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-        }
     }
 
 
@@ -92,12 +64,9 @@ class MainActivity : AppCompatActivity() {
             dialog.dismiss()
         }
         builder.setNeutralButton("Cancel") { _, _ ->
-            // Do something when click the neutral button
             dialog.cancel()
         }
-        // Initialize the AlertDialog using builder object
         dialog = builder.create()
-        // Finally, display the alert dialog
         dialog.show()
 
     }

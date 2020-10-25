@@ -1,4 +1,4 @@
-package com.example.mytodo.fragments
+package com.example.mytodo.ui.fragments
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -12,12 +12,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.mytodo.MyAdapter
+import com.example.mytodo.ui.MyAdapter
 import com.example.mytodo.R
 import com.example.mytodo.data.Task
 import com.example.mytodo.databinding.FragmentListBinding
 import com.example.mytodo.hideKeyboard
-import com.example.mytodo.viewmodel.TaskDBViewModel
+import com.example.mytodo.ui.TaskDBViewModel
 import kotlinx.coroutines.launch
 import java.lang.Thread.sleep
 
@@ -28,9 +28,7 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
     private lateinit var binding: FragmentListBinding
     private lateinit var adapter: MyAdapter
 
-
     private val args by navArgs<ListFragmentArgs>()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +57,6 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
                 findNavController().navigate(
                     R.id.action_listFragment_to_newTaskFragment, null, null, extras
                 )
-
 
             }
 
@@ -96,6 +93,7 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
             val builder = AlertDialog.Builder(requireContext())
             builder.setPositiveButton(R.string.Yes) { _, _ ->
                 viewModel.deleteAll()
+
                 Toast.makeText(requireContext(), R.string.all_deleted, Toast.LENGTH_SHORT)
                     .show()
 

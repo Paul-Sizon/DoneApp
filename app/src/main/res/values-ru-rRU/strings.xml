@@ -17,6 +17,11 @@
     <string name="please_fill">Пожалуйста запишите название задачи</string>
     <string name="all_deleted">Все задачи удалены</string>
     <string name="task_updated">Обновлено</string>
+    <string name="internet_connect">Подключитесь к интернету, чтобы увидеть цитату.</string>
+    <string name="confucius">Конфуций</string>
+    <string name="light">Светлая</string>
+    <string name="theme">Тема</string>
+    <string name="about">О приложении</string>
 
 
 </resources>

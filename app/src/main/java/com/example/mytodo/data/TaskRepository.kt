@@ -1,11 +1,10 @@
 package com.example.mytodo.data
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import com.example.mytodo.data.db.TaskDatabaseDao
 import com.example.mytodo.network.model.Post
 import com.example.mytodo.network.retroApi
 import retrofit2.Response
-import retrofit2.Retrofit
 
 class TaskRepository(private val taskDao: TaskDatabaseDao) {
 

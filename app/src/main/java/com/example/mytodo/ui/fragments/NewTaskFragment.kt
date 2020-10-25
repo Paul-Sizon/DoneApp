@@ -1,8 +1,6 @@
-package com.example.mytodo.fragments
+package com.example.mytodo.ui.fragments
 
 import android.os.Bundle
-import android.os.SystemClock.sleep
-import android.transition.Fade
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,14 +11,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.mytodo.R
+import com.example.mytodo.checkLanguage
+import com.example.mytodo.checksTitle
 import com.example.mytodo.data.Task
 import com.example.mytodo.databinding.FragmentNewTaskBinding
 import com.example.mytodo.hasNetworkAvailable
-import com.example.mytodo.viewmodel.TaskDBViewModel
+import com.example.mytodo.ui.TaskDBViewModel
 import com.google.android.material.transition.MaterialContainerTransform
-import com.google.android.material.transition.MaterialFadeThrough
 import kotlinx.coroutines.launch
-import java.util.*
 
 
 class NewTaskFragment : Fragment() {
@@ -50,12 +48,13 @@ class NewTaskFragment : Fragment() {
         // inspirational phrase
         binding.motivButton.setOnClickListener {
             binding.progressBar.visibility = View.VISIBLE
-            checkInternet()
+            passThePhrase()
+
         }
 
 
         //add new task
-        binding.bbb.setOnClickListener {
+        binding.addButton.setOnClickListener {
             insertDataToDatabase()
         }
 
@@ -63,27 +62,39 @@ class NewTaskFragment : Fragment() {
     }
 
 
+    /** database block  */
+
+    private fun insertDataToDatabase() {
+        val task = Task(
+            0,
+            title = binding.editTextTitle.text.toString(),
+            describtion = binding.editTextDescrib.text.toString()
+        )
+
+        //action
+        if (checksTitle(binding.editTextTitle, binding.materialText)) {
+            viewModel.insert(task)
+            Toast.makeText(requireContext(), R.string.new_added, Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_newTaskFragment_to_listFragment)
+        }
+    }
+
+
     /** inspirational phrase block  */
 
-    fun checkInternet() {
+    private fun passThePhrase() {
         if (hasNetworkAvailable()) {
-            insertMotivation()
+            getInspiration()
         } else {
-            binding.motivationText.text = "Please Connect to the Internet to see the quote"
-            binding.motivationAuthor.text = "Confucius"
+            binding.motivationText.text = getString(R.string.internet_connect)
+            binding.motivationAuthor.text = getString(R.string.confucius)
             binding.progressBar.visibility = View.GONE
 
         }
     }
 
-    // changes phrase based on the system's language. Only russian and english are available on the server
-    private fun checkLanguage(): String {
-        return if (Locale.getDefault().language == "ru") "ru"
-        else "en"
-    }
 
-
-    private fun insertMotivation() = lifecycleScope.launch {
+    private fun getInspiration() = lifecycleScope.launch {
         viewModel.getPost(checkLanguage())
         viewModel.myResponse.observe(viewLifecycleOwner, { response ->
             if (response.isSuccessful) {
@@ -98,34 +109,6 @@ class NewTaskFragment : Fragment() {
         })
     }
 
-
-    /** database block  */
-
-    private fun insertDataToDatabase() {
-        val task = Task(
-            0,
-            title = binding.editTextTitle.text.toString(),
-            describtion = binding.editTextDescrib.text.toString()
-        )
-
-        //action
-        if (checkTitle()) {
-            viewModel.insert(task)
-            Toast.makeText(requireContext(), R.string.new_added, Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_newTaskFragment_to_listFragment)
-        } else {
-            Toast.makeText(requireContext(), R.string.please_fill, Toast.LENGTH_SHORT).show()
-
-        }
-    }
-
-    //check that title is not empty
-    private fun checkTitle(): Boolean {
-        if (binding.editTextTitle.text?.isEmpty()!!) {
-            return false
-        }
-        return true
-    }
 
 }
 
