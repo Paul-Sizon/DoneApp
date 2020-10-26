@@ -1,7 +1,7 @@
 <resources>
     <!-- Base application theme. -->
     <!--    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Customize your theme here. -->
 
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -9,22 +9,24 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="background">@color/background</item>
         <item name="colorError">#F67A7A</item>
-
         <item name="android:colorSecondary">@color/secondary</item>
 
+        <item name="actionBarTheme">@style/AppbarTheme</item>
     </style>
 
-    <style name="ToolbarTheme" parent="AppTheme">
+
+    <style name="AppbarTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar.Bridge">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="background">@color/background</item>
+        <item name="colorError">#F67A7A</item>
+
+        <item name="tint">#eeeeee</item>
         <item name="android:actionMenuTextColor">#eeeeee</item>
         <item name="actionMenuTextColor">#eeeeee</item>
         <item name="android:textColorSecondary">#eeeeee</item>
-        <!--        <item name="android:textColorPrimary">@color/my_color1</item>-->
-        <!--        <item name="android:textColorSecondary">@color/my_color2</item>-->
-        <!--        <item name="android:textColor">@color/my_color3</item>-->
+        <item name="android:textColorPrimary">#eeeeee</item>
+        <!-- actionMenuTextColor is the color of the text of action (menu) items  -->
     </style>
-    `
-    <style name="WindowAnimationTransition">
-        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
-    </style>
-
 </resources>

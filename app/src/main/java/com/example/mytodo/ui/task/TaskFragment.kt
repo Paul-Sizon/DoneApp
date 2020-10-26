@@ -3,6 +3,7 @@ package com.example.mytodo.ui.task
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -22,7 +23,6 @@ class TaskFragment : Fragment() {
 
     private val args: TaskFragmentArgs by navArgs()
 
-    //private val TAG = "MyFragment"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = MaterialContainerTransform()
@@ -37,6 +37,7 @@ class TaskFragment : Fragment() {
         if (args.task != null) {
             ViewCompat.setTransitionName(binding.ltRoot, args.task?.taskId.toString())
         }
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -77,12 +78,12 @@ class TaskFragment : Fragment() {
         viewModel.motivationLive.observe(viewLifecycleOwner, { task ->
             if (task != null) {
                 binding.tvMotivation.text = task.quoteText
-                binding.motivationAuthor.text = task.quoteAuthor
+                binding.tvMotivationAuthor.text = task.quoteAuthor
                 binding.pbProgress.visibility = View.GONE
             } else {
                 binding.tvMotivation.text =
                     getString(R.string.task_msg_please_connect_to_internet)
-                binding.motivationAuthor.text = getString(R.string.task_msg_confucius)
+                binding.tvMotivationAuthor.text = getString(R.string.task_msg_confucius)
                 binding.pbProgress.visibility = View.GONE
             }
         })
@@ -145,7 +146,9 @@ class TaskFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        if (args.task != null) inflater.inflate(R.menu.delete, menu)
+        if (args.task != null) {
+            inflater.inflate(R.menu.delete, menu)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -158,6 +161,7 @@ class TaskFragment : Fragment() {
             false
         }
     }
+
 
     private fun deleteOneTask() {
         args.task?.let { viewModel.deleteOne(it) }

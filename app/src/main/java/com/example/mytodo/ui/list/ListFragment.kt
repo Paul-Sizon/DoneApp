@@ -12,6 +12,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.transition.Transition
+import androidx.transition.TransitionInflater
 import com.example.mytodo.MyAdapter
 import com.example.mytodo.R
 import com.example.mytodo.Utils
@@ -27,6 +29,8 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
     private lateinit var binding: FragmentListBinding
     private lateinit var adapter: MyAdapter
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,7 +43,6 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
         val recyclerview = binding.recyclerView
         recyclerview.adapter = adapter
 
-        //button action with material design motion
         binding.root.doOnPreDraw {
             startPostponedEnterTransition()
         }

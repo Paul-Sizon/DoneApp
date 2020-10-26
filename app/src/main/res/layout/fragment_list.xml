@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:windowSoftInputMode="stateAlwaysHidden"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
-
-    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.list.ListFragment"
         android:background="@color/background"
+        tools:context=".ui.list.ListFragment">
 
-        >
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -25,9 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/items_layout"
-            />
-
+            tools:listitem="@layout/items_layout" />
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -38,17 +32,17 @@
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/ic_baseline_add_24"
-            app:tint="#FFFFFF"
-            app:elevation="8dp"
+            android:transitionName="shared_element_container"
             app:backgroundTint="@color/colorPrimary"
+            app:elevation="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.958"
             app:rippleColor="#FFFFFF"
+            app:tint="#FFFFFF" />
 
 
-            android:transitionName="shared_element_container"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
