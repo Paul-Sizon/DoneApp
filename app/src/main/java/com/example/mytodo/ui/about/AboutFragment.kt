@@ -3,15 +3,13 @@ package com.example.mytodo.ui.about
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.mytodo.R
-import kotlinx.android.synthetic.main.fragment_about.*
 
 class AboutFragment : Fragment() {
 
@@ -29,13 +27,13 @@ class AboutFragment : Fragment() {
 
 
     private fun sendEmail() {
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.data =
-            Uri.parse("mailto:paul.sizon@outlook.com") // only email apps should handle this
-        //intent.putExtra(Intent.EXTRA_EMAIL, "")
         try {
-            startActivity(Intent.createChooser(intent, "Choose Email Client..."))
-            // startActivity(intent)
+            val emailIntent = Intent(
+                Intent.ACTION_SENDTO, Uri.fromParts(
+                    "mailto", "paul.sizon@outlook.com", null
+                )
+            )
+            startActivity(Intent.createChooser(emailIntent, "Choose Email Client..."))
         } catch (e: Exception) {
             //if any thing goes wrong for example no email client application or any exception
             //get and show exception message
