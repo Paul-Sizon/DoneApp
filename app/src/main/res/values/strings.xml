@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My ToDO</string>
+    <string name="app_name" translatable="false">Done App</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 
@@ -25,9 +25,15 @@
     <string name="theme">Theme</string>
     <string name="about">About</string>
     <string name="error_empty_title">title must not be empty</string>
-    <string name="hello_there_this_is_a_simple_to_do_app">Hello there, this is a simple To-Do App</string>
-    <string name="developer_paul_sizon">Developer: Paul Sizon \n \nContacts:</string>
-    <string name="my_email">Paul.Sizon@outlook.com</string>
+    <string name="hello_there">Hello there, this is a simple To-Do App</string>
+    <string name="developer_paul_sizon">Developer: Paul Sizon</string>
+    <string name="my_email" translatable="false">Paul.Sizon@outlook.com</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="systemDeafult">System default</string>
+    <string name="cancel">Cancel</string>
+    <string name="contact">Contacts:</string>
+    <string name="chooseTheme">Choose theme</string>
 
 
 </resources>

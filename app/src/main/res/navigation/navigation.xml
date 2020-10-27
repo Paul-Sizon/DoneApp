@@ -39,7 +39,7 @@
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.example.mytodo.ui.about.AboutFragment"
-        android:label="About"
+        android:label="@string/about"
         tools:layout="@layout/fragment_about" />
 
 </navigation>

@@ -20,13 +20,13 @@ class TodoApplication : Application() {
             Context.MODE_PRIVATE
         )
         val mode = sharedPref.getString("mode", "")
-        if (mode == "Dark") {
+        if (mode == getString(R.string.dark)) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
-        if (mode == "Light") {
+        if (mode == getString(R.string.light)) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-        if (mode == "System default") {
+        if (mode == getString(R.string.systemDeafult)) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         }
     }

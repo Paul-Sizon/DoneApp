@@ -3,7 +3,9 @@ package com.example.mytodo
 import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+
 
 object Utils {
     fun hideKeyboard(activity: Activity) {
@@ -18,6 +20,7 @@ object Utils {
             )
         }
     }
+
 
 
     fun hasNetworkAvailable(): Boolean {

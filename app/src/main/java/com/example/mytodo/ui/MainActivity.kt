@@ -38,29 +38,30 @@ class MainActivity : AppCompatActivity() {
         // Late initialize an alert dialog object
         lateinit var dialog: AlertDialog
         // Initialize an array of colors
-        val array = arrayOf("Light", "Dark", "System default")
+        val array = arrayOf(getString(R.string.light), getString(R.string.dark), getString(R.string.systemDeafult))
         // Initialize a new instance of alert dialog builder object
         val builder = AlertDialog.Builder(this)
         // Set a title for alert dialog
-        builder.setTitle("Choose theme")
+        builder.setTitle(getString(R.string.chooseTheme))
         // Set the single choice items for alert dialog with initial selection
         builder.setSingleChoiceItems(array, -1) { _, which ->
             // Get the dialog selected item
             val choice = array[which]
-            if (choice == "Dark") {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-            if (choice == "Light") {
+            if (choice == array[0]) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
-            if (choice == "System default") {
+            if (choice == array[1]) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+
+            if (choice == array[2]) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             }
 
             editor.putString("mode", choice).apply()
             dialog.dismiss()
         }
-        builder.setNeutralButton("Cancel") { _, _ ->
+        builder.setNeutralButton(getString(R.string.cancel)) { _, _ ->
             // Do something when click the neutral button
             dialog.cancel()
         }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">My ToDO</string>
     <string name="done_button">Añadir</string>
     <string name="get_inspiration">Inspírate</string>
     <string name="title">Título</string>
@@ -17,9 +16,17 @@
     <string name="please_fill">Por favor complete el titulo</string>
     <string name="all_deleted">Todas las tareas eliminadas</string>
     <string name="task_updated">Tarea actualizada</string>
-    <string name="task_msg_please_connect_to_internet">Please Connect to the Internet to see the quote</string>
-    <string name="task_msg_confucius">Confucius</string>
-    <string name="theme">Theme</string>
-    <string name="about">About</string>
-    <string name="error_empty_title">title must not be empty</string>
+    <string name="task_msg_please_connect_to_internet">Conéctese a Internet para ver la frase</string>
+    <string name="task_msg_confucius">Confucio</string>
+    <string name="theme">Tema</string>
+    <string name="about">Sobre la aplicación</string>
+    <string name="error_empty_title">el título no debe estar vacío</string>
+    <string name="light">Ligero</string>
+    <string name="cancel">Cancelado</string>
+    <string name="contact">Contactos:</string>
+    <string name="dark">Oscuro</string>
+    <string name="developer_paul_sizon">Desarrollador: Paul Sizon</string>
+    <string name="systemDeafult">Sistémico</string>
+    <string name="hello_there">Hola, esta es una aplicación sencilla para tomar notas.</string>
+    <string name="chooseTheme">Escoge un tema:</string>
 </resources>

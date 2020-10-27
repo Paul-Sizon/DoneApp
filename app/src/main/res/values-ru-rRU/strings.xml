@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">My ToDO</string>
     <string name="done_button">Добавить</string>
     <string name="describtion">Описание</string>
     <string name="title">Название</string>
@@ -17,11 +16,19 @@
     <string name="please_fill">Пожалуйста запишите название задачи</string>
     <string name="all_deleted">Все задачи удалены</string>
     <string name="task_updated">Обновлено</string>
-    <string name="task_msg_please_connect_to_internet">Please Connect to the Internet to see the quote</string>
-    <string name="task_msg_confucius">Confucius</string>
-    <string name="theme">Theme</string>
-    <string name="about">About</string>
-    <string name="error_empty_title">title must not be empty</string>
+    <string name="task_msg_please_connect_to_internet">Пожалуйста подключитесь к интернету, чтобы увидеть цитату.</string>
+    <string name="task_msg_confucius">Конфуций</string>
+    <string name="theme">Тема</string>
+    <string name="about">О приложении</string>
+    <string name="error_empty_title">заполните форму</string>
+    <string name="hello_there">Приветствую! Это простое приложение для заметок</string>
+    <string name="developer_paul_sizon">Разработчик: Павел Сизоненко</string>
+    <string name="light">Светлая</string>
+    <string name="cancel">Отмена</string>
+    <string name="contact">Контакты:</string>
+    <string name="dark">Темная</string>
+    <string name="systemDeafult">Системная</string>
+    <string name="chooseTheme">Выберите тему:</string>
 
 
 </resources>
