@@ -1,4 +1,4 @@
-package com.example.mytodo.ui
+package com.boss.mytodo.ui
 
 
 import android.app.AlertDialog
@@ -14,7 +14,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 
-import com.example.mytodo.R
+import com.boss.mytodo.R
 
 
 class MainActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.example.mytodo
+package com.boss.mytodo
 
 import android.app.Application
 import android.content.Context

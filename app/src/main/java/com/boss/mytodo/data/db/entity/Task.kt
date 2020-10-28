@@ -1,4 +1,4 @@
-package com.example.mytodo.data.db.entity
+package com.boss.mytodo.data.db.entity
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo

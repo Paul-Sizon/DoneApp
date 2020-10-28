@@ -1,8 +1,8 @@
-package com.example.mytodo.data.db
+package com.boss.mytodo.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.mytodo.data.db.entity.Task
+import com.boss.mytodo.data.db.entity.Task
 
 @Dao
 interface TaskDatabaseDao {

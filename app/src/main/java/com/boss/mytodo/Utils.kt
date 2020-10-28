@@ -1,9 +1,7 @@
-package com.example.mytodo
+package com.boss.mytodo
 
 import android.app.Activity
 import android.content.Context
-import android.net.ConnectivityManager
-import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 
 
@@ -21,14 +19,6 @@ object Utils {
         }
     }
 
-
-
-    fun hasNetworkAvailable(): Boolean {
-        val service = Context.CONNECTIVITY_SERVICE
-        val manager = TodoApplication.appContext?.getSystemService(service) as ConnectivityManager?
-        val network = manager?.activeNetworkInfo
-        return (network != null)
-    }
 }
 
 

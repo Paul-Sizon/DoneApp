@@ -1,4 +1,4 @@
-package com.example.mytodo.ui.list
+package com.boss.mytodo.ui.list
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -12,14 +12,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import androidx.transition.Transition
-import androidx.transition.TransitionInflater
-import com.example.mytodo.MyAdapter
-import com.example.mytodo.R
-import com.example.mytodo.Utils
-import com.example.mytodo.data.db.entity.Task
-import com.example.mytodo.databinding.FragmentListBinding
-import com.example.mytodo.ui.TaskDBViewModel
+import com.boss.mytodo.MyAdapter
+import com.boss.mytodo.R
+import com.boss.mytodo.Utils
+import com.boss.mytodo.data.db.entity.Task
+import com.boss.mytodo.databinding.FragmentListBinding
+import com.boss.mytodo.ui.TaskDBViewModel
 import kotlinx.coroutines.launch
 
 

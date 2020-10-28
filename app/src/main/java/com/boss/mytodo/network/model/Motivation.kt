@@ -1,4 +1,4 @@
-package com.example.mytodo.network.model
+package com.boss.mytodo.network.model
 
 data class Motivation(
     val quoteText: String,

@@ -1,6 +1,6 @@
-package com.example.mytodo.network
+package com.boss.mytodo.network
 
-import com.example.mytodo.network.model.Motivation
+import com.boss.mytodo.network.model.Motivation
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Response

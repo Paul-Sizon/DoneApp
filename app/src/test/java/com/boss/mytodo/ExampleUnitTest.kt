@@ -1,4 +1,4 @@
-package com.example.mytodo
+package com.boss.mytodo
 
 import org.junit.Test
 

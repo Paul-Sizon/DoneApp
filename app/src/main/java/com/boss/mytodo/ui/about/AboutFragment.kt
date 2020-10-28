@@ -1,4 +1,4 @@
-package com.example.mytodo.ui.about
+package com.boss.mytodo.ui.about
 
 import android.content.Intent
 import android.net.Uri
@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.mytodo.R
+import com.boss.mytodo.R
 
 class AboutFragment : Fragment() {
 
@@ -35,7 +35,7 @@ class AboutFragment : Fragment() {
             )
             startActivity(Intent.createChooser(emailIntent, "Choose Email Client..."))
         } catch (e: Exception) {
-            //if any thing goes wrong for example no email client application or any exception
+            //if any thing goes wrong for boss no email client application or any exception
             //get and show exception message
             Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
         }

@@ -1,4 +1,4 @@
-package com.example.mytodo
+package com.boss.mytodo
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mytodo.data.db.entity.Task
+import com.boss.mytodo.data.db.entity.Task
 import kotlinx.android.synthetic.main.items_layout.view.*
 
 

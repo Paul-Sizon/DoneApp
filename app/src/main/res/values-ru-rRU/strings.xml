@@ -29,6 +29,7 @@
     <string name="dark">Темная</string>
     <string name="systemDeafult">Системная</string>
     <string name="chooseTheme">Выберите тему:</string>
+    <string name="edit">Обновить задачу</string>
 
 
 </resources>

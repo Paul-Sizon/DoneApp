@@ -1,17 +1,17 @@
-package com.example.mytodo.ui.task
+package com.boss.mytodo.ui.task
 
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
-import com.example.mytodo.R
-import com.example.mytodo.data.db.entity.Task
-import com.example.mytodo.databinding.FragmentTaskBinding
-import com.example.mytodo.ui.TaskDBViewModel
+import com.boss.mytodo.R
+import com.boss.mytodo.data.db.entity.Task
+import com.boss.mytodo.databinding.FragmentTaskBinding
+import com.boss.mytodo.ui.TaskDBViewModel
 import com.google.android.material.transition.MaterialContainerTransform
 import java.util.*
 
@@ -48,6 +48,7 @@ class TaskFragment : Fragment() {
     }
 
     private fun subscribeUi() {
+
         // inspirational phrase
         val task = args.task
         if (task == null) {
@@ -63,6 +64,7 @@ class TaskFragment : Fragment() {
             }
         } else {
             binding.apply {
+                (requireActivity() as AppCompatActivity).supportActionBar!!.title = getString(R.string.edit)
                 btnUpdate.text = requireContext().getText(R.string.update)
                 btnUpdate.setOnClickListener {
                     updateItem()

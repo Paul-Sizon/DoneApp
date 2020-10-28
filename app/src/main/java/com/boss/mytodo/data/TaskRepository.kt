@@ -1,10 +1,10 @@
-package com.example.mytodo.data
+package com.boss.mytodo.data
 
 import androidx.lifecycle.LiveData
-import com.example.mytodo.data.db.TaskDatabaseDao
-import com.example.mytodo.data.db.entity.Task
-import com.example.mytodo.network.model.Motivation
-import com.example.mytodo.network.RetroApi
+import com.boss.mytodo.data.db.TaskDatabaseDao
+import com.boss.mytodo.data.db.entity.Task
+import com.boss.mytodo.network.model.Motivation
+import com.boss.mytodo.network.RetroApi
 import retrofit2.Response
 
 class TaskRepository(private val taskDao: TaskDatabaseDao) {

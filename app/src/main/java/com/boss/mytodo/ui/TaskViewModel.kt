@@ -1,13 +1,13 @@
-package com.example.mytodo.ui
+package com.boss.mytodo.ui
 
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.mytodo.data.db.entity.Task
-import com.example.mytodo.data.db.TaskDatabase
-import com.example.mytodo.data.TaskRepository
-import com.example.mytodo.network.model.Motivation
+import com.boss.mytodo.data.db.entity.Task
+import com.boss.mytodo.data.db.TaskDatabase
+import com.boss.mytodo.data.TaskRepository
+import com.boss.mytodo.network.model.Motivation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -63,7 +63,6 @@ class TaskDBViewModel(application: Application) : AndroidViewModel(application) 
         } catch (throwable: Throwable) {
             when (throwable) {
                 is IOException -> {
-                    val code = throwable
                     Log.e("TaskViewModel", throwable.message.toString())
                     motivationLive.postValue(null)
                 }

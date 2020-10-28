@@ -34,6 +34,7 @@
     <string name="cancel">Cancel</string>
     <string name="contact">Contacts:</string>
     <string name="chooseTheme">Choose theme</string>
+    <string name="edit">Edit task</string>
 
 
 </resources>
