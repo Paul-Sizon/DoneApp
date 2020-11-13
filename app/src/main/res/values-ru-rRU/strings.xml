@@ -30,6 +30,8 @@
     <string name="systemDeafult">Системная</string>
     <string name="chooseTheme">Выберите тему:</string>
     <string name="edit">Обновить задачу</string>
+    <string name="taskUpdated">Обновлено</string>
+    <string name="chooseEmail">Выберите почту...</string>
 
 
 </resources>

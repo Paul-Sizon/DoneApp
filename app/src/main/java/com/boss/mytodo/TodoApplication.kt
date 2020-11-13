@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatDelegate
 
-// TODO: implement functions in Utils
+
 class TodoApplication : Application() {
     override fun onCreate() {
         super.onCreate()

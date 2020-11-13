@@ -12,7 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import com.boss.mytodo.MyAdapter
+import com.boss.mytodo.ui.MyAdapter
 import com.boss.mytodo.R
 import com.boss.mytodo.Utils
 import com.boss.mytodo.data.db.entity.Task

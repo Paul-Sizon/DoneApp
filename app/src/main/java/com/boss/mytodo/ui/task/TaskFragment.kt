@@ -1,5 +1,6 @@
 package com.boss.mytodo.ui.task
 
+
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -20,7 +21,6 @@ class TaskFragment : Fragment() {
 
     private lateinit var binding: FragmentTaskBinding
     private val viewModel: TaskDBViewModel by activityViewModels()
-
     private val args: TaskFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +48,6 @@ class TaskFragment : Fragment() {
     }
 
     private fun subscribeUi() {
-
         // inspirational phrase
         val task = args.task
         if (task == null) {
@@ -64,7 +63,8 @@ class TaskFragment : Fragment() {
             }
         } else {
             binding.apply {
-                (requireActivity() as AppCompatActivity).supportActionBar!!.title = getString(R.string.edit)
+                (requireActivity() as AppCompatActivity).supportActionBar!!.title =
+                    getString(R.string.edit)
                 btnUpdate.text = requireContext().getText(R.string.update)
                 btnUpdate.setOnClickListener {
                     updateItem()
@@ -110,10 +110,12 @@ class TaskFragment : Fragment() {
             title = binding.etTitle.text.toString(),
             description = binding.etDiscription.text.toString()
         )
-
         //action
         if (checkTitle()) {
+
             viewModel.insert(task)
+
+
             Toast.makeText(requireContext(), R.string.new_added, Toast.LENGTH_SHORT).show()
             requireActivity().onBackPressed()
         } else {
@@ -123,28 +125,36 @@ class TaskFragment : Fragment() {
 
     //check that title is not empty
     private fun checkTitle(): Boolean {
-        if (binding.etTitle.text?.isEmpty()!!) {
-            return false
-        }
-        return true
+        return (binding.etTitle.text?.isNotEmpty()!!)
     }
 
     private fun updateItem() {
-        val tit = binding.etTitle.text.toString()
+        val titl = binding.etTitle.text.toString()
         val desc = binding.etDiscription.text.toString()
 
         if (checkTitle()) {
             val task = args.task ?: return
-            val updated = Task(task.taskId, tit, desc)
+            val updated = Task(
+                task.taskId,
+                titl,
+                desc
+            )
+
             viewModel.update(updated)
 
-            Toast.makeText(requireContext(), "Task updated", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.taskUpdated), Toast.LENGTH_SHORT)
+                .show()
 
             requireActivity().onBackPressed()
         } else {
             binding.materialText.error = getString(R.string.error_empty_title)
 
         }
+    }
+
+    private fun deleteOneTask() {
+        args.task?.let { viewModel.deleteOne(it) }
+        requireActivity().onBackPressed()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -165,8 +175,5 @@ class TaskFragment : Fragment() {
     }
 
 
-    private fun deleteOneTask() {
-        args.task?.let { viewModel.deleteOne(it) }
-        requireActivity().onBackPressed()
-    }
+
 }

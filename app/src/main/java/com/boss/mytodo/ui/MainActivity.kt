@@ -13,8 +13,8 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
-
 import com.boss.mytodo.R
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -91,4 +91,6 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.myNavHostFragment)
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
+
 }

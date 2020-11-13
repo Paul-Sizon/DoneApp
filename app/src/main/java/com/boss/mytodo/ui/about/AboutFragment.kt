@@ -33,7 +33,7 @@ class AboutFragment : Fragment() {
                     "mailto", "paul.sizon@outlook.com", null
                 )
             )
-            startActivity(Intent.createChooser(emailIntent, "Choose Email Client..."))
+            startActivity(Intent.createChooser(emailIntent, getString(R.string.chooseEmail)))
         } catch (e: Exception) {
             //if any thing goes wrong for boss no email client application or any exception
             //get and show exception message

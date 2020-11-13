@@ -35,6 +35,8 @@
     <string name="contact">Contacts:</string>
     <string name="chooseTheme">Choose theme</string>
     <string name="edit">Edit task</string>
+    <string name="taskUpdated">Task updated</string>
+    <string name="chooseEmail">Choose Email Client...</string>
 
 
 </resources>

@@ -30,4 +30,6 @@
     <string name="hello_there">Hola, esta es una aplicación sencilla para tomar notas.</string>
     <string name="chooseTheme">Escoge un tema:</string>
     <string name="edit">Editar tarea</string>
+    <string name="taskUpdated">Task updated</string>
+    <string name="chooseEmail">Choose Email Client...</string>
 </resources>
