@@ -16,15 +16,16 @@ import java.io.IOException
 
 class TaskDBViewModel(application: Application) : AndroidViewModel(application) {
 
-    val getAllTasks: LiveData<List<Task>>
-
+    val getAllTasksDesc: LiveData<List<Task>>
+    val getAllTasksAsc: LiveData<List<Task>>
     private val repository: TaskRepository
     val motivationLive: MutableLiveData<Motivation> = MutableLiveData()
 
     init {
         val taskDatabaseDao = TaskDatabase.getDatabase(application).taskDatabaseDao()
         repository = TaskRepository(taskDatabaseDao)
-        getAllTasks = repository.getAllTasks
+        getAllTasksDesc = repository.getAllTasksDesc
+        getAllTasksAsc = repository.getAllTasksAsc
     }
 
 

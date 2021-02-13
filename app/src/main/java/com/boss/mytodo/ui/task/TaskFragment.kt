@@ -112,10 +112,7 @@ class TaskFragment : Fragment() {
         )
         //action
         if (checkTitle()) {
-
             viewModel.insert(task)
-
-
             Toast.makeText(requireContext(), R.string.new_added, Toast.LENGTH_SHORT).show()
             requireActivity().onBackPressed()
         } else {
@@ -139,9 +136,7 @@ class TaskFragment : Fragment() {
                 titl,
                 desc
             )
-
             viewModel.update(updated)
-
             Toast.makeText(requireContext(), getString(R.string.taskUpdated), Toast.LENGTH_SHORT)
                 .show()
 

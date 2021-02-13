@@ -4,12 +4,18 @@
     >
 
 
+
+    <item android:id="@+id/sort"
+        android:title="sort"
+        android:checkable="true"
+        android:icon="@drawable/sortfinal"
+        app:showAsAction="always" />
+
     <item android:id="@+id/menu_delete"
         android:title="Delete"
         android:icon="@drawable/ic__delete_24"
         app:showAsAction="ifRoom"
         />
-
 
 
 

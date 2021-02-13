@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.boss.mytodo.data.db.entity.Task
 
-@Database(entities = [Task::class], version = 6, exportSchema = false)
+@Database(entities = [Task::class], version = 7, exportSchema = false)
 abstract class TaskDatabase : RoomDatabase() {
     abstract fun taskDatabaseDao(): TaskDatabaseDao
 

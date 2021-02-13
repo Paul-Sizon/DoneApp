@@ -7,6 +7,11 @@
         android:icon="@drawable/ic__delete_24"
         app:showAsAction="ifRoom" />
 
+ <item android:id="@+id/order"
+        android:title="order"
+        android:icon="@drawable/sort_d"
+        app:showAsAction="always" />
+
 
 
 

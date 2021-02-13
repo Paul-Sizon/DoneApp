@@ -2,33 +2,15 @@ package com.boss.mytodo
 
 import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatDelegate
+import com.boss.mytodo.data.SharedPrefs
+import com.boss.mytodo.ui.defaultTheme
 
 
 class TodoApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         appContext = applicationContext
-        defaultTheme()
-    }
-
-    /** remembers the theme  */
-    private fun defaultTheme() {
-        val sharedPref: SharedPreferences = getSharedPreferences(
-            "SharedPrefs",
-            Context.MODE_PRIVATE
-        )
-        val mode = sharedPref.getString("mode", "")
-        if (mode == getString(R.string.dark)) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }
-        if (mode == getString(R.string.light)) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
-        if (mode == getString(R.string.systemDeafult)) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-        }
+        defaultTheme(SharedPrefs(this).sharedPref, this)
     }
 
     companion object {

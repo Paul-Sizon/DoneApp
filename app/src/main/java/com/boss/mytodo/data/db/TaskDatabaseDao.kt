@@ -22,7 +22,11 @@ interface TaskDatabaseDao {
     suspend fun getOneTask(): Task?
 
     @Query("SELECT * FROM task_table ORDER BY taskId DESC")
-    fun getAllTasks(): LiveData<List<Task>>
+    fun getAllTasksDesc(): LiveData<List<Task>>
+
+     @Query("SELECT * FROM task_table ORDER BY taskId ASC")
+    fun getAllTasksAsc(): LiveData<List<Task>>
+
 
     @Query("SELECT COUNT(*) FROM task_table")
     suspend fun getCount(): Int

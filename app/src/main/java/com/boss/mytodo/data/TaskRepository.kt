@@ -9,7 +9,8 @@ import retrofit2.Response
 
 class TaskRepository(private val taskDao: TaskDatabaseDao) {
 
-    val getAllTasks: LiveData<List<Task>> = taskDao.getAllTasks()
+    val getAllTasksDesc: LiveData<List<Task>> = taskDao.getAllTasksDesc()
+    val getAllTasksAsc: LiveData<List<Task>> = taskDao.getAllTasksAsc()
 
 
     suspend fun insert(task: Task) {

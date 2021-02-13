@@ -35,8 +35,6 @@ class AboutFragment : Fragment() {
             )
             startActivity(Intent.createChooser(emailIntent, getString(R.string.chooseEmail)))
         } catch (e: Exception) {
-            //if any thing goes wrong for boss no email client application or any exception
-            //get and show exception message
             Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
         }
     }

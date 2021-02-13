@@ -30,7 +30,6 @@ class MyAdapter(taskEvents: TaskEvents) :
             itemView.title_item.text = task.title
             itemView.describ_item.text = task.description
 
-
             itemView.checkBox.setOnClickListener { listener.onDeleteClicked(task, itemView) }
 
             ViewCompat.setTransitionName(itemView.item_lay, task.taskId.toString())
