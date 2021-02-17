@@ -31,7 +31,7 @@
         android:text="@string/developer_paul_sizon"
         android:textColor="@color/text"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/email_adress"
+        app:layout_constraintBottom_toBottomOf="@+id/tvEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +55,7 @@
         app:layout_constraintVertical_bias="0.239" />
 
     <TextView
-        android:id="@+id/email_adress"
+        android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -73,6 +73,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.282" />
+
+    <!--    <Button-->
+    <!--        android:id="@+id/btnGit"-->
+    <!--        app:icon="@drawable/gitcat"-->
+    <!--        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"-->
+    <!--        android:layout_width="200dp"-->
+    <!--        android:layout_height="200dp"-->
+    <!--        android:layout_marginStart="12dp"-->
+    <!--        android:text="Git"-->
+    <!--        android:textAlignment="center"-->
+    <!--        android:textColor="@color/colorAccent"-->
+    <!--        android:textSize="18sp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.0"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.38" />-->
+
+    <ImageButton
+        android:id="@+id/btnGit"
+        android:layout_width="188dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="12dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/catty"
+        android:text="Git"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.402" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

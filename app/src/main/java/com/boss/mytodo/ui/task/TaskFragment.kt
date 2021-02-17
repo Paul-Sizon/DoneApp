@@ -160,7 +160,7 @@ class TaskFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (args.task != null) {
-            if (item.itemId == R.id.menu_delete) {
+            if (item.itemId == R.id.delete) {
                 deleteOneTask()
             }
             super.onOptionsItemSelected(item)

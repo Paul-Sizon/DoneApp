@@ -6,23 +6,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.boss.mytodo.R
+import com.boss.mytodo.databinding.FragmentAboutBinding
 
 class AboutFragment : Fragment() {
-
+    private lateinit var binding: FragmentAboutBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_about, container, false)
+        binding = FragmentAboutBinding.inflate(inflater, container, false)
 
-        // send me an email
-        view.findViewById<TextView>(R.id.email_adress).setOnClickListener { sendEmail() }
-        return view
+        binding.apply {
+            tvEmail.setOnClickListener { sendEmail() }
+            btnGit.setOnClickListener { findNavController().navigate(R.id.webFragment) }
+        }
+
+        return binding.root
     }
 
 

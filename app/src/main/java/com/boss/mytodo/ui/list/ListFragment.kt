@@ -13,12 +13,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import com.boss.mytodo.ui.MyAdapter
 import com.boss.mytodo.R
 import com.boss.mytodo.Utils
 import com.boss.mytodo.data.SharedPrefs
 import com.boss.mytodo.data.db.entity.Task
 import com.boss.mytodo.databinding.FragmentListBinding
+import com.boss.mytodo.ui.MyAdapter
 import com.boss.mytodo.ui.TaskDBViewModel
 import kotlinx.coroutines.launch
 
@@ -44,6 +44,7 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
         adapter = MyAdapter(this)
         val recyclerview = binding.recyclerView
         recyclerview.adapter = adapter
+
 
         binding.root.doOnPreDraw {
             startPostponedEnterTransition()
@@ -86,15 +87,14 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.delete, menu)
+        inflater.inflate(R.menu.sort_delete, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        if (item.itemId == R.id.menu_delete) {
+        if (item.itemId == R.id.delete) {
             deleteAll()
         }
-        //TODO
         if (item.itemId == R.id.sort) {
             var checkOrder = sharedPrefs.getBoolean("sort_desc", true)
             if (checkOrder) {
@@ -140,4 +140,6 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
             navController.navigate(action, extras)
         }
     }
+
+
 }
