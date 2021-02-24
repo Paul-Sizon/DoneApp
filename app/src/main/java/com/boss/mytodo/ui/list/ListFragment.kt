@@ -13,6 +13,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.boss.mytodo.R
 import com.boss.mytodo.Utils
 import com.boss.mytodo.data.SharedPrefs
@@ -28,6 +30,7 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
     private val viewModel: TaskDBViewModel by activityViewModels()
     private lateinit var binding: FragmentListBinding
     private lateinit var adapter: MyAdapter
+    private lateinit var recyclerview: RecyclerView
     private lateinit var sharedPrefs: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
 
@@ -42,7 +45,7 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
 
         //recyclerView
         adapter = MyAdapter(this)
-        val recyclerview = binding.recyclerView
+        recyclerview = binding.recyclerView
         recyclerview.adapter = adapter
 
 
@@ -82,6 +85,25 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
         } else {
             viewModel.getAllTasksAsc.observe(viewLifecycleOwner, { adapter.submitList(it) })
         }
+
+
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            0,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                viewModel.deleteOne(adapter.getItem(viewHolder.adapterPosition))
+                Toast.makeText(requireContext(), "Note deleted", Toast.LENGTH_SHORT).show()
+            }
+        }).attachToRecyclerView(recyclerview)
 
 
     }
