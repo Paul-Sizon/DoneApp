@@ -32,4 +32,6 @@
     <string name="edit">Editar tarea</string>
     <string name="taskUpdated">Task updated</string>
     <string name="chooseEmail">Choose Email Client...</string>
+    <string name="Undo">Undo</string>
+    <string name="Delete">Deleted</string>
 </resources>

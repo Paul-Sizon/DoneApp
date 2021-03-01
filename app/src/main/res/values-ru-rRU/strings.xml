@@ -32,6 +32,8 @@
     <string name="edit">Обновить задачу</string>
     <string name="taskUpdated">Обновлено</string>
     <string name="chooseEmail">Выберите почту...</string>
+    <string name="Undo">Undo</string>
+    <string name="Delete">Удалено</string>
 
 
 </resources>

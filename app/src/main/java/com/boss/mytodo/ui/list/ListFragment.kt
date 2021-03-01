@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.ItemTouchHelper.ACTION_STATE_DRAG
 import androidx.recyclerview.widget.RecyclerView
 import com.boss.mytodo.R
 import com.boss.mytodo.Utils
@@ -22,6 +23,7 @@ import com.boss.mytodo.data.db.entity.Task
 import com.boss.mytodo.databinding.FragmentListBinding
 import com.boss.mytodo.ui.MyAdapter
 import com.boss.mytodo.ui.TaskDBViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 
@@ -86,26 +88,75 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
             viewModel.getAllTasksAsc.observe(viewLifecycleOwner, { adapter.submitList(it) })
         }
 
+        class SimpleItemTouchHelperCallback: ItemTouchHelper.Callback() {
 
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
-            0,
-            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
-        ) {
+            override fun isLongPressDragEnabled(): Boolean {
+                return true
+            }
+
+            override fun isItemViewSwipeEnabled(): Boolean {
+                return true
+            }
+            override fun getMovementFlags(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ): Int {
+                // Specify the directions of movement
+                val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
+                val swipeFlags = ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+                return makeMovementFlags(dragFlags, swipeFlags)
+            }
+
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-                return false
+                adapter.notifyItemMoved(viewHolder.adapterPosition, target.adapterPosition)
+                return true
+            }
+            override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+                super.onSelectedChanged(viewHolder, actionState)
+                if (actionState == ACTION_STATE_DRAG) {
+                    viewHolder?.itemView?.performHapticFeedback(
+                        HapticFeedbackConstants.KEYBOARD_TAP,
+                        HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING
+                    )
+                }
+            }
+
+            override fun clearView(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ) {
+                super.clearView(recyclerView, viewHolder)
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 viewModel.deleteOne(adapter.getItem(viewHolder.adapterPosition))
-                Toast.makeText(requireContext(), "Note deleted", Toast.LENGTH_SHORT).show()
+                restoreData(viewHolder.itemView, adapter.getItem(viewHolder.adapterPosition))
             }
-        }).attachToRecyclerView(recyclerview)
+        }
+
+        val callback: ItemTouchHelper.Callback = SimpleItemTouchHelperCallback()
+        val touchHelper = ItemTouchHelper(callback)
+        touchHelper.attachToRecyclerView(recyclerview)
 
 
+    }
+
+    private fun restoreData(
+        view: View,
+        task: Task
+    ) {
+        Snackbar.make(view, "${getString(R.string.Delete)} ${task.title}", Snackbar.LENGTH_LONG).also {
+            it.apply {
+                setAction(getString(R.string.Undo)) {
+                    viewModel.insert(task)
+                }
+                show()
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

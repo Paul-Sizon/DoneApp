@@ -37,8 +37,8 @@
     <string name="edit">Edit task</string>
     <string name="taskUpdated">Task updated</string>
     <string name="chooseEmail">Choose Email Client...</string>
-
-
+    <string name="Undo">Undo</string>
+    <string name="Delete">Deleted</string>
 
 
 </resources>
