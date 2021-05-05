@@ -37,9 +37,10 @@ fun showThemeDialog(editor: SharedPreferences.Editor, context: Context) {
 
 }
 
+//todo delete context reference
 
 /** remembers the theme  */
-fun defaultTheme(sharedPref: SharedPreferences, context: Context) {
+fun setDefaultTheme(sharedPref: SharedPreferences, context: Context) {
     val mode = sharedPref.getString("mode", "")
     if (mode == context.getString(R.string.dark)) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

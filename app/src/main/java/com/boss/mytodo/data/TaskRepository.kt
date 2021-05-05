@@ -3,11 +3,12 @@ package com.boss.mytodo.data
 import androidx.lifecycle.LiveData
 import com.boss.mytodo.data.db.TaskDatabaseDao
 import com.boss.mytodo.data.db.entity.Task
+import com.boss.mytodo.network.QuoteApi
 import com.boss.mytodo.network.model.Motivation
-import com.boss.mytodo.network.RetroApi
 import retrofit2.Response
+import javax.inject.Inject
 
-class TaskRepository(private val taskDao: TaskDatabaseDao) {
+class TaskRepository@Inject constructor(private val api: QuoteApi, private val taskDao: TaskDatabaseDao) {
 
     val getAllTasksDesc: LiveData<List<Task>> = taskDao.getAllTasksDesc()
     val getAllTasksAsc: LiveData<List<Task>> = taskDao.getAllTasksAsc()
@@ -35,7 +36,7 @@ class TaskRepository(private val taskDao: TaskDatabaseDao) {
     }
 
     suspend fun getMotivation(language: String): Response<Motivation> {
-        return RetroApi.api.getMotivation(language)
+        return api.getMotivation(language)
     }
 
 }

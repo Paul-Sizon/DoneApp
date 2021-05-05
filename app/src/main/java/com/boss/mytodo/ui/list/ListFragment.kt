@@ -17,10 +17,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.ACTION_STATE_DRAG
 import androidx.recyclerview.widget.RecyclerView
 import com.boss.mytodo.R
-import com.boss.mytodo.Utils
 import com.boss.mytodo.data.SharedPrefs
 import com.boss.mytodo.data.db.entity.Task
 import com.boss.mytodo.databinding.FragmentListBinding
+import com.boss.mytodo.other.Utils
 import com.boss.mytodo.ui.MyAdapter
 import com.boss.mytodo.ui.TaskDBViewModel
 import com.google.android.material.snackbar.Snackbar

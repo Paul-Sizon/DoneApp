@@ -1,32 +1,27 @@
 package com.boss.mytodo.ui
 
 
-import android.app.Application
 import android.util.Log
-import androidx.lifecycle.*
-import com.boss.mytodo.data.db.entity.Task
-import com.boss.mytodo.data.db.TaskDatabase
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.boss.mytodo.data.TaskRepository
+import com.boss.mytodo.data.db.entity.Task
 import com.boss.mytodo.network.model.Motivation
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
+import javax.inject.Inject
 
+@HiltViewModel
+class TaskDBViewModel @Inject constructor(private val repository: TaskRepository) : ViewModel() {
 
-class TaskDBViewModel(application: Application) : AndroidViewModel(application) {
-
-    val getAllTasksDesc: LiveData<List<Task>>
-    val getAllTasksAsc: LiveData<List<Task>>
-    private val repository: TaskRepository
+    val getAllTasksDesc: LiveData<List<Task>> = repository.getAllTasksDesc
+    val getAllTasksAsc: LiveData<List<Task>> = repository.getAllTasksAsc
     val motivationLive: MutableLiveData<Motivation> = MutableLiveData()
-
-    init {
-        val taskDatabaseDao = TaskDatabase.getDatabase(application).taskDatabaseDao()
-        repository = TaskRepository(taskDatabaseDao)
-        getAllTasksDesc = repository.getAllTasksDesc
-        getAllTasksAsc = repository.getAllTasksAsc
-    }
 
 
     fun insert(task: Task) {
