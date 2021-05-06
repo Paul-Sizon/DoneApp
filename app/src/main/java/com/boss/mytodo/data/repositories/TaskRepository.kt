@@ -1,4 +1,4 @@
-package com.boss.mytodo.data
+package com.boss.mytodo.data.repositories
 
 import androidx.lifecycle.LiveData
 import com.boss.mytodo.data.db.TaskDatabaseDao
@@ -8,7 +8,7 @@ import com.boss.mytodo.network.model.Motivation
 import retrofit2.Response
 import javax.inject.Inject
 
-class TaskRepository@Inject constructor(private val api: QuoteApi, private val taskDao: TaskDatabaseDao) {
+class TaskRepository@Inject constructor(private val taskDao: TaskDatabaseDao) {
 
     val getAllTasksDesc: LiveData<List<Task>> = taskDao.getAllTasksDesc()
     val getAllTasksAsc: LiveData<List<Task>> = taskDao.getAllTasksAsc()
@@ -35,8 +35,5 @@ class TaskRepository@Inject constructor(private val api: QuoteApi, private val t
         return taskDao.getCount()
     }
 
-    suspend fun getMotivation(language: String): Response<Motivation> {
-        return api.getMotivation(language)
-    }
 
 }

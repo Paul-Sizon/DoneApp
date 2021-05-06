@@ -22,14 +22,14 @@ import com.boss.mytodo.data.db.entity.Task
 import com.boss.mytodo.databinding.FragmentListBinding
 import com.boss.mytodo.other.Utils
 import com.boss.mytodo.ui.MyAdapter
-import com.boss.mytodo.ui.TaskDBViewModel
+import com.boss.mytodo.ui.viewModels.TaskViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 
 open class ListFragment : Fragment(), MyAdapter.TaskEvents {
 
-    private val viewModel: TaskDBViewModel by activityViewModels()
+    private val viewModel: TaskViewModel by activityViewModels()
     private lateinit var binding: FragmentListBinding
     private lateinit var adapter: MyAdapter
     private lateinit var recyclerview: RecyclerView

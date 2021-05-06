@@ -12,7 +12,8 @@ import androidx.navigation.fragment.navArgs
 import com.boss.mytodo.R
 import com.boss.mytodo.data.db.entity.Task
 import com.boss.mytodo.databinding.FragmentTaskBinding
-import com.boss.mytodo.ui.TaskDBViewModel
+import com.boss.mytodo.ui.viewModels.MotivationViewModel
+import com.boss.mytodo.ui.viewModels.TaskViewModel
 import com.google.android.material.transition.MaterialContainerTransform
 import java.util.*
 
@@ -20,7 +21,8 @@ import java.util.*
 class TaskFragment : Fragment() {
 
     private lateinit var binding: FragmentTaskBinding
-    private val viewModel: TaskDBViewModel by activityViewModels()
+    private val taskViewModel: TaskViewModel by activityViewModels()
+    private val motivViewModel: MotivationViewModel by activityViewModels()
     private val args: TaskFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,7 +79,7 @@ class TaskFragment : Fragment() {
     }
 
     private fun subscribeObservers() {
-        viewModel.motivationLive.observe(viewLifecycleOwner, { task ->
+        motivViewModel.motivationLive.observe(viewLifecycleOwner, { task ->
             if (task != null) {
                 binding.tvMotivation.text = task.quoteText
                 binding.tvMotivationAuthor.text = task.quoteAuthor
@@ -100,7 +102,7 @@ class TaskFragment : Fragment() {
     }
 
     private fun getMotivation() {
-        viewModel.getMotivation(checkLanguage())
+        motivViewModel.getMotivation(checkLanguage())
     }
 
     /** database block  */
@@ -112,7 +114,7 @@ class TaskFragment : Fragment() {
         )
         //action
         if (checkTitle()) {
-            viewModel.insert(task)
+            taskViewModel.insert(task)
             Toast.makeText(requireContext(), R.string.new_added, Toast.LENGTH_SHORT).show()
             requireActivity().onBackPressed()
         } else {
@@ -136,7 +138,7 @@ class TaskFragment : Fragment() {
                 titl,
                 desc
             )
-            viewModel.update(updated)
+            taskViewModel.update(updated)
             Toast.makeText(requireContext(), getString(R.string.taskUpdated), Toast.LENGTH_SHORT)
                 .show()
 
@@ -148,7 +150,7 @@ class TaskFragment : Fragment() {
     }
 
     private fun deleteOneTask() {
-        args.task?.let { viewModel.deleteOne(it) }
+        args.task?.let { taskViewModel.deleteOne(it) }
         requireActivity().onBackPressed()
     }
 
