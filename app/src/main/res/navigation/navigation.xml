@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.boss.mytodo.ui.list.ListFragment"
+        android:name="com.boss.mytodo.ui.fragments.list.ListFragment"
         android:label="@string/list"
         tools:layout="@layout/fragment_list">
         <action
@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/taskFragment"
-        android:name="com.boss.mytodo.ui.task.TaskFragment"
+        android:name="com.boss.mytodo.ui.fragments.task.TaskFragment"
         android:label="@string/add_new_task"
         tools:layout="@layout/fragment_task">
         <argument
@@ -38,7 +38,7 @@
         android:label="MainActivity"/>
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.boss.mytodo.ui.about.AboutFragment"
+        android:name="com.boss.mytodo.ui.fragments.about.AboutFragment"
         android:label="@string/about"
         tools:layout="@layout/fragment_about" >
         <action
@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/webFragment"
-        android:name="com.boss.mytodo.ui.WebFragment"
+        android:name="com.boss.mytodo.ui.fragments.web.WebFragment"
         android:label="Github"
         tools:layout="@layout/fragment_web" />
 

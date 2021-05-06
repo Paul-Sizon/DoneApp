@@ -1,4 +1,4 @@
-package com.boss.mytodo.ui
+package com.boss.mytodo.ui.fragments.web
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

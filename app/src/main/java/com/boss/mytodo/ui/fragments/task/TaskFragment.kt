@@ -1,4 +1,4 @@
-package com.boss.mytodo.ui.task
+package com.boss.mytodo.ui.fragments.task
 
 
 import android.os.Bundle

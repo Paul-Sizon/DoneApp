@@ -1,4 +1,4 @@
-package com.boss.mytodo.ui.list
+package com.boss.mytodo.ui.fragments.list
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -21,17 +21,17 @@ import com.boss.mytodo.data.SharedPrefs
 import com.boss.mytodo.data.db.entity.Task
 import com.boss.mytodo.databinding.FragmentListBinding
 import com.boss.mytodo.other.Utils
-import com.boss.mytodo.ui.MyAdapter
+import com.boss.mytodo.ui.TaskAdapter
 import com.boss.mytodo.ui.viewModels.TaskViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 
-open class ListFragment : Fragment(), MyAdapter.TaskEvents {
+open class ListFragment : Fragment(), TaskAdapter.TaskEvents {
 
     private val viewModel: TaskViewModel by activityViewModels()
     private lateinit var binding: FragmentListBinding
-    private lateinit var adapter: MyAdapter
+    private lateinit var adapter: TaskAdapter
     private lateinit var recyclerview: RecyclerView
     private lateinit var sharedPrefs: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
@@ -46,7 +46,7 @@ open class ListFragment : Fragment(), MyAdapter.TaskEvents {
         sharedPrefs = SharedPrefs(requireContext()).sharedPref
 
         //recyclerView
-        adapter = MyAdapter(this)
+        adapter = TaskAdapter(this)
         recyclerview = binding.recyclerView
         recyclerview.adapter = adapter
 
