@@ -113,7 +113,7 @@ class TaskFragment : Fragment() {
             description = binding.etDiscription.text.toString()
         )
         //action
-        if (checkTitle()) {
+        if (!isTitleEmpty()) {
             taskViewModel.insert(task)
             Toast.makeText(requireContext(), R.string.new_added, Toast.LENGTH_SHORT).show()
             requireActivity().onBackPressed()
@@ -123,15 +123,15 @@ class TaskFragment : Fragment() {
     }
 
     //check that title is not empty
-    private fun checkTitle(): Boolean {
-        return (binding.etTitle.text?.isNotEmpty()!!)
+    private fun isTitleEmpty(): Boolean {
+        return (binding.etTitle.text?.isEmpty()!!)
     }
 
     private fun updateItem() {
         val titl = binding.etTitle.text.toString()
         val desc = binding.etDiscription.text.toString()
 
-        if (checkTitle()) {
+        if (!isTitleEmpty()) {
             val task = args.task ?: return
             val updated = Task(
                 task.taskId,
