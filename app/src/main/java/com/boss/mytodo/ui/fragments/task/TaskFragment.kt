@@ -40,6 +40,7 @@ class TaskFragment : Fragment() {
             ViewCompat.setTransitionName(binding.ltRoot, args.task?.taskId.toString())
         }
         setHasOptionsMenu(true)
+
         return binding.root
     }
 
