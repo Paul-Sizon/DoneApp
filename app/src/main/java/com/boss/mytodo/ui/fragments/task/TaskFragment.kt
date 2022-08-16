@@ -34,7 +34,7 @@ class TaskFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentTaskBinding.inflate(inflater, container, false)
         if (args.task != null) {
             ViewCompat.setTransitionName(binding.ltRoot, args.task?.taskId.toString())
@@ -80,7 +80,7 @@ class TaskFragment : Fragment() {
     }
 
     private fun subscribeObservers() {
-        motivViewModel.motivationLive.observe(viewLifecycleOwner, { task ->
+        motivViewModel.motivationLive.observe(viewLifecycleOwner) { task ->
             if (task != null) {
                 binding.tvMotivation.text = task.quoteText
                 binding.tvMotivationAuthor.text = task.quoteAuthor
@@ -91,7 +91,7 @@ class TaskFragment : Fragment() {
                 binding.tvMotivationAuthor.text = getString(R.string.task_msg_confucius)
                 binding.pbProgress.visibility = View.GONE
             }
-        })
+        }
     }
 
     /** inspirational phrase block  */
@@ -171,7 +171,6 @@ class TaskFragment : Fragment() {
             false
         }
     }
-
 
 
 }

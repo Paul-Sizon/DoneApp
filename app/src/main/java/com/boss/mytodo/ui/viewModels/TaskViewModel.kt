@@ -4,8 +4,8 @@ package com.boss.mytodo.ui.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.boss.mytodo.data.repositories.TaskRepository
 import com.boss.mytodo.data.db.entity.Task
+import com.boss.mytodo.data.repositories.TaskRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,8 +17,6 @@ class TaskViewModel @Inject constructor(private val repository: TaskRepository) 
 
     val getAllTasksDesc: LiveData<List<Task>> = repository.getAllTasksDesc
     val getAllTasksAsc: LiveData<List<Task>> = repository.getAllTasksAsc
-
-
 
     fun insert(task: Task) {
         viewModelScope.launch(Dispatchers.IO) {

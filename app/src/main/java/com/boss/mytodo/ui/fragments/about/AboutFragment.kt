@@ -18,7 +18,7 @@ class AboutFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentAboutBinding.inflate(inflater, container, false)
 
         binding.apply {
@@ -28,7 +28,6 @@ class AboutFragment : Fragment() {
 
         return binding.root
     }
-
 
     private fun sendEmail() {
         try {
@@ -42,6 +41,5 @@ class AboutFragment : Fragment() {
             Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
         }
     }
-
 
 }

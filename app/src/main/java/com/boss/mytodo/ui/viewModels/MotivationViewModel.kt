@@ -14,7 +14,8 @@ import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
-class MotivationViewModel @Inject constructor(private val repository: MotivRepository) : ViewModel() {
+class MotivationViewModel @Inject constructor(private val repository: MotivRepository) :
+    ViewModel() {
     val motivationLive: MutableLiveData<Motivation> = MutableLiveData()
 
     fun getMotivation(language: String) = viewModelScope.launch(Dispatchers.Default) {

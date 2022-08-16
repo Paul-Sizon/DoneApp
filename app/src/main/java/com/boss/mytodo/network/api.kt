@@ -23,5 +23,3 @@ interface QuoteApi {
     ): Response<Motivation>
 
 }
-
-

@@ -17,20 +17,11 @@ class TaskAdapter(taskEvents: TaskEvents) :
 
     private val listener: TaskEvents = taskEvents
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.items_layout, parent, false)
         )
     }
-
-
-//    private var data: List<Task> = emptyList()
-//    fun setNewList(newList: List<Task>) {
-//        data = newList
-//        notifyDataSetChanged()
-//    }
-
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
